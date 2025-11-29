@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X, Building2 } from './Icons';
+import { X, Building2, Linkedin, Globe } from './Icons';
 
 interface CaseStudiesModalProps {
   isOpen: boolean;
@@ -64,6 +64,31 @@ const CaseStudiesModal: React.FC<CaseStudiesModalProps> = ({ isOpen, onClose }) 
                     We have unlocked this infrastructure to democratize success, giving independent talent 
                     access to the same algorithmic triggers used by global superstars.
                 </p>
+            </section>
+
+            {/* Corporate Verification */}
+            <section className="text-center space-y-6 pt-8 border-t border-white/5">
+                <h3 className="text-sm font-bold text-zinc-500 uppercase tracking-widest">Corporate Verification</h3>
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                    <a 
+                        href="https://www.linkedin.com/in/kanta-kudo-5b018785" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 px-6 py-3 bg-zinc-800 hover:bg-[#0077b5] hover:text-white text-zinc-300 rounded-lg transition-all font-bold text-xs uppercase tracking-wider group"
+                    >
+                        <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                        Executive Profile
+                    </a>
+                    <a 
+                        href="https://www.kantaland.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 px-6 py-3 bg-zinc-800 hover:bg-white hover:text-black text-zinc-300 rounded-lg transition-all font-bold text-xs uppercase tracking-wider group"
+                    >
+                        <Globe className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                        Official Website
+                    </a>
+                </div>
             </section>
 
         </div>

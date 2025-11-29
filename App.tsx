@@ -112,13 +112,13 @@ function App() {
         </header>
 
         {/* Hero Section */}
-        <section className="text-center pt-12 sm:pt-16 pb-12 px-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
+        <section className="text-center pt-10 sm:pt-16 pb-12 px-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md animate-[fadeIn_0.5s_ease-out]">
             <ShieldCheck className="w-4 h-4 text-cyan-400" />
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300">Authorized Consultant Access</span>
           </div>
           
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-[Syne] leading-[0.95] sm:leading-[0.9] mb-8 uppercase tracking-tight break-words">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-[Syne] leading-[0.95] sm:leading-[0.9] mb-8 uppercase tracking-tight break-words animate-[slideUp_0.5s_ease-out]">
             Artist Growth <br/>
             <span className="wild-gradient-text relative inline-block">
               Architect
@@ -126,14 +126,14 @@ function App() {
             </span>
           </h1>
           
-          <p className="text-zinc-300 max-w-xl mx-auto text-lg sm:text-xl leading-loose mb-12 px-2">
-            Artist Acceleration Ecosystem. Review real-time metrics with your client to identify eligibility for backend major label campaign.
+          <p className="text-zinc-300 max-w-xl mx-auto text-lg sm:text-xl leading-loose mb-12 px-2 animate-[slideUp_0.7s_ease-out]">
+            Artist Acceleration Ecosystem. Review real-time metrics with the artist to identify eligibility for backend major label campaign.
           </p>
 
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center mb-12 animate-[slideUp_0.9s_ease-out]">
              <button 
                 onClick={() => setShowPitchDeck(true)}
-                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center gap-2"
+                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 flex items-center gap-2"
              >
                 <Play className="w-4 h-4 fill-black" /> Launch Presentation Mode
              </button>
@@ -151,7 +151,7 @@ function App() {
         {/* Pricing Grid */}
         <section className="px-4 pb-32">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
               {tiers.map((tier) => (
                 <PricingCard 
                   key={tier.id} 

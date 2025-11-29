@@ -87,8 +87,8 @@ const SubscriberSlider: React.FC<SubscriberSliderProps> = ({ value, onChange, so
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-16 px-4">
-      <div className="glass-panel p-6 sm:p-8 rounded-2xl border-t border-white/20 shadow-2xl relative overflow-hidden group">
+    <div className="w-full max-w-2xl mx-auto mb-12 sm:mb-16 px-4">
+      <div className="glass-panel p-5 sm:p-8 rounded-2xl border-t border-white/20 shadow-2xl relative overflow-hidden group">
         
         {/* Decorative background glow */}
         <div className={`absolute -top-20 -right-20 w-40 sm:w-64 h-40 sm:h-64 rounded-full blur-3xl transition-all duration-700 ${isElite ? 'bg-fuchsia-500/20' : isBreakthrough ? 'bg-cyan-500/20' : 'bg-lime-500/10'}`}></div>
@@ -100,7 +100,7 @@ const SubscriberSlider: React.FC<SubscriberSliderProps> = ({ value, onChange, so
                 <div className="w-full md:w-auto">
                     <label className="flex items-center gap-2 text-sm font-bold text-zinc-400 uppercase tracking-wider mb-2">
                         <Music className="w-4 h-4" />
-                        Client Monthly Listeners
+                        Artist Monthly Listeners
                     </label>
                     <h3 className="text-4xl sm:text-5xl md:text-6xl font-black text-white font-[Syne] tabular-nums tracking-tight break-all sm:break-normal">
                         {value >= 1000000 ? (value/1000000).toFixed(1) + 'M' : value.toLocaleString()} 
@@ -112,10 +112,10 @@ const SubscriberSlider: React.FC<SubscriberSliderProps> = ({ value, onChange, so
                 <div className={`
                     flex items-center gap-2 px-3 py-2 rounded-full border 
                     ${tierBg} ${tierBorder} ${tierColor}
-                    transition-all duration-500 max-w-full
+                    transition-all duration-500 max-w-full flex-wrap
                 `}>
                     {isElite ? <Award className="w-5 h-5 shrink-0" /> : <TrendingUp className="w-5 h-5 shrink-0" />}
-                    <span className="font-bold text-xs sm:text-sm uppercase leading-none">
+                    <span className="font-bold text-xs sm:text-sm uppercase leading-none whitespace-normal text-left">
                         {tierLabel}
                     </span>
                 </div>
@@ -218,7 +218,7 @@ const SubscriberSlider: React.FC<SubscriberSliderProps> = ({ value, onChange, so
       </div>
       
       <p className="text-center text-zinc-400 mt-6 text-xs sm:text-sm font-medium max-w-lg mx-auto px-4 leading-relaxed uppercase tracking-wider">
-        Input <strong>client's</strong> current monthly listeners to calculate safe velocity.
+        Input <strong>artist's</strong> current monthly listeners to calculate safe velocity.
       </p>
     </div>
   );

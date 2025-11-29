@@ -62,7 +62,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     // Email Validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email || !emailRegex.test(formData.email)) {
-        newErrors.email = 'A valid client email is required.';
+        newErrors.email = 'A valid artist email is required.';
         hasError = true;
     }
 
@@ -105,7 +105,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     // Simulation Sequence
     const sequence = [
         { text: 'Connecting to Spotify for Artists API...', time: 800 },
-        { text: `Scanning Client Profile...`, time: 2000 },
+        { text: `Scanning Artist Profile...`, time: 2000 },
         { text: 'Analyzing Monthly Listener Trends...', time: 3500 },
         { text: 'Verifying Agency Credentials...', time: 4500 },
         { text: 'Validating Tier Eligibility...', time: 5500 },
@@ -129,7 +129,7 @@ URGENT: NEW ELITE SUBMISSION
 
 TIER: ${tier.name} ($${tier.price.toLocaleString()})
 ARTIST URL: ${formData.url}
-CLIENT EMAIL: ${formData.email}
+ARTIST EMAIL: ${formData.email}
 CONSULTANT: ${formData.affiliateCode}
 
 Requesting manual invoice and verification.
@@ -167,7 +167,7 @@ CONSULTANT: ${formData.affiliateCode || "N/A"}
                       <span className="text-lime-400">Submission Approved</span>
                     ) : (
                       <>
-                        New Client Submission
+                        New Artist Submission
                         <ShieldCheck className="w-5 h-5 text-lime-400" />
                       </>
                     )}
@@ -280,7 +280,7 @@ CONSULTANT: ${formData.affiliateCode || "N/A"}
                     </div>
                 </div>
                 
-                <h3 className="text-lg font-bold text-white mb-2">Auditing Client Metrics</h3>
+                <h3 className="text-lg font-bold text-white mb-2">Auditing Artist Metrics</h3>
                 
                 {/* Simulated Terminal Output */}
                 <div className="h-8 flex items-center justify-center w-full max-w-xs">

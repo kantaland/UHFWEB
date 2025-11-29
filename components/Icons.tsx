@@ -27,7 +27,8 @@ import {
   FileText,
   BarChart3,
   Building2,
-  ExternalLink
+  ExternalLink,
+  Linkedin
 } from 'lucide-react';
 
 export { 
@@ -58,5 +59,6 @@ export {
   FileText,
   BarChart3,
   Building2,
-  ExternalLink
+  ExternalLink,
+  Linkedin
 };
