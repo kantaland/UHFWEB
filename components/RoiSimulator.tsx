@@ -286,7 +286,7 @@ const RoiSimulator: React.FC<RoiSimulatorProps> = ({ initialStreams, songConfig,
                     className="w-full h-2 bg-gray-800 rounded-none appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border [&::-webkit-slider-thumb]:border-black hover:[&::-webkit-slider-thumb]:scale-125 transition-all"
                 />
                 <p className="text-xs text-gray-400 mt-5 leading-relaxed">
-                    Adjusts annual stream injection. <span className={targetStreams >= 100000000 ? "text-emerald-500 font-bold" : ""}>Note: High Velocity (>100M) requires 300+ songs.</span>
+                    Adjusts annual stream injection. <span className={targetStreams >= 100000000 ? "text-emerald-500 font-bold" : ""}>Note: High Velocity (&gt;100M) requires 300+ songs.</span>
                 </p>
             </div>
 
