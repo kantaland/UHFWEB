@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PricingTier } from '../types';
-import { X, Check, Lock, ChevronRight, FileText, Download, ShieldCheck } from './Icons';
+import { X, Check, Lock, ChevronRight, FileText, Download, ShieldCheck, CreditCard } from './Icons';
 import { jsPDF } from 'jspdf';
 
 interface CheckoutModalProps {
@@ -121,7 +121,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
         },
         {
             title: "16. NON-DISPARAGEMENT",
-            body: "Client agrees not to make or publish any false, misleading, or disparaging statements regarding Provider, its services, personnel, or operations."
+            body: "Client agrees to not make or publish any false, misleading, or disparaging statements regarding Provider, its services, personnel, or operations."
         },
         {
             title: "17. NO OPERATIONAL AUDIT",
@@ -370,17 +370,106 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     doc.text(`Digital Execution ID: ${id}`, margin, y);
     doc.text("Urban Hippy Fantasy | Registered S-Corp in California", margin + 100, y);
 
+    // --- EXHIBIT A: ACTIVATION INSTRUCTIONS ---
+    doc.addPage();
+    y = 30;
+    
+    doc.setTextColor(0);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("EXHIBIT A: ACTIVATION PROTOCOL", margin, y);
+    y += 10;
+    
+    doc.setFontSize(12);
+    doc.text("PROMOTION ACTIVATION INSTRUCTIONS & OFFICE HOURS (REQUIRED)", margin, y);
+    y += 15;
+
+    const activationSteps = [
+        {
+            title: "1. Playlist Preparation",
+            body: [
+                "Prior to promotion activation, the Client must create one (1) Spotify playlist containing all catalog tracks intended for inclusion in the campaign.",
+                "Playlist requirements:",
+                "• Playlist must be created directly on Spotify",
+                "• Playlist must include all approved catalog songs (recommended 100+ tracks for sustainability)",
+                "• Playlist must be set to Public",
+                "• No third-party, editorial, or algorithmic playlists may be used"
+            ]
+        },
+        {
+            title: "2. Submission Requirements",
+            body: [
+                "Along with the executed and downloaded Service Agreement, the Client must submit:",
+                "• Spotify playlist link (URL) containing the full catalog",
+                "• Signed Service Agreement (PDF or equivalent)",
+                "All materials must be submitted via email to: aoi@urbanhippyfantasy.com",
+                "Promotion will not begin until both items are received and verified."
+            ]
+        },
+        {
+            title: "3. Activation & Confirmation",
+            body: [
+                "Upon receipt of the signed agreement and playlist link:",
+                "• An Urban Hippy Fantasy consultant will review the submission",
+                "• Promotion activation status will be confirmed within 24–48 business hours",
+                "• Once promotion activation has commenced, the campaign is considered initiated and subject to all no-refund, lock-in, and commitment provisions outlined in the Agreement"
+            ]
+        },
+        {
+            title: "4. Office Hours & Processing Window",
+            body: [
+                "Urban Hippy Fantasy Corp business hours are:",
+                "• Monday – Friday",
+                "• 10:00 AM – 3:00 PM (Pacific Time)",
+                "Submissions received after 3:00 PM PT will be processed on the next business day.",
+                "Weekends and recognized holidays are non-operational.",
+                "Any materials submitted during weekends or holidays will be reviewed on the next business day.",
+                "All processing timelines and activation windows are calculated exclusively within stated business hours."
+            ]
+        },
+        {
+            title: "5. Important Notices",
+            body: [
+                "Client is responsible for ensuring all tracks are properly distributed, live, and visible on Spotify prior to submission.",
+                "Changes to playlist content after activation may impact delivery timelines.",
+                "Incomplete submissions may delay activation without liability to the Provider."
+            ]
+        }
+    ];
+
+    activationSteps.forEach(step => {
+        // Checks for page breaks
+        if (y > pageHeight - 40) { doc.addPage(); y = 30; }
+
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(11);
+        doc.text(step.title, margin, y);
+        y += 6;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        
+        step.body.forEach(line => {
+             // split long lines
+             const splitLine = doc.splitTextToSize(line, contentWidth - 5);
+             if (y + (splitLine.length * 5) > pageHeight - 20) { doc.addPage(); y = 30; }
+             doc.text(splitLine, margin + 5, y);
+             y += (splitLine.length * 5) + 2;
+        });
+        y += 4;
+    });
+
     // Save
     doc.save(`UHF_Agreement_${tier.id}_${new Date().toISOString().split('T')[0]}.pdf`);
   };
 
   const handleProceedToPayment = () => {
     if (tier.id === 'pack-annual') {
-        window.open('https://www.paypal.com/checkoutweb/signup?useraction=commit&ssrt=1765949112955&ul=1&country.x=GB&locale.x=en_GB&modxo_redirect_reason=guest_user&token=5Y449642VY8628055&rcache=1&cookieBannerVariant=hidden&locale.x=en_GB&country.x=GB', '_blank');
+        window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-6PG18869JV642600TNFBD5II', '_blank');
     } else if (tier.id === 'pack-scale') {
-        window.open('https://www.paypal.com/checkoutweb/signup?useraction=commit&ssrt=1765948883618&ul=1&country.x=GB&locale.x=en_GB&modxo_redirect_reason=guest_user&token=2KN956842U111793V&rcache=1&cookieBannerVariant=hidden&locale.x=en_GB&country.x=GB', '_blank');
+        window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-6V694153PN622930PNFBDZHQ', '_blank');
     } else if (tier.id === 'pack-entry') {
-        window.open('https://www.paypal.com/checkoutweb/signup?useraction=commit&ssrt=1765949342430&ul=1&country.x=GB&locale.x=en_GB&modxo_redirect_reason=guest_user&token=75537518SS4636435&rcache=1&cookieBannerVariant=hidden&locale.x=en_GB&country.x=GB', '_blank');
+        window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-5KT00357JY0333253NFBD7DA', '_blank');
     } else {
         onClose();
     }
@@ -390,17 +479,17 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-8">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={onClose}></div>
 
-      <div className="relative w-full h-full md:max-w-2xl md:h-auto bg-black border border-white/20 flex flex-col animate-[fadeIn_0.3s_ease-out] shadow-2xl">
+      <div className="relative w-full h-full md:max-w-2xl md:max-h-[90vh] bg-black border border-white/20 flex flex-col animate-[fadeIn_0.3s_ease-out] shadow-2xl overflow-hidden">
         
         {/* Header */}
-        <div className="flex items-center justify-between p-8 border-b border-white/10">
+        <div className="flex items-center justify-between p-8 border-b border-white/10 shrink-0 bg-black z-10">
             <h3 className="text-xl font-light uppercase tracking-wide text-white">
                 {step === 'success' ? 'Protocol Active' : step === 'contract' ? 'Execute Agreement' : 'Application Protocol'}
             </h3>
             <button onClick={onClose} className="p-2 text-gray-500 hover:text-white transition-colors"><X className="w-6 h-6" /></button>
         </div>
 
-        <div className="p-8 md:p-12 overflow-y-auto">
+        <div className="p-8 md:p-12 overflow-y-auto custom-scrollbar flex-1">
             
             {/* --- SUCCESS STEP --- */}
             {step === 'success' ? (
@@ -410,7 +499,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
                 </div>
                 <h3 className="text-3xl font-light text-white uppercase mb-4">Contract Executed</h3>
                 <p className="text-gray-400 text-base mb-8 max-w-sm mx-auto leading-relaxed">
-                    Agreement stored on secure ledger. Please download your copy below before proceeding to payment.
+                    Agreement stored on secure ledger. Please download your copy below (includes Activation Instructions) before proceeding to payment.
                 </p>
                 
                 <button 
@@ -420,23 +509,86 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
                     <Download className="w-4 h-4" /> Download Signed Copy (PDF)
                 </button>
 
-                <div className="bg-[#111] border border-white/10 p-8 text-left mb-8">
-                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-4">Invoice Summary</p>
-                    <div className="flex justify-between mb-3">
-                        <span className="text-white text-base">{tier.name}</span>
-                        <span className="text-white text-base font-bold">${tier.price.toLocaleString()}</span>
+                {/* Activation Instructions Preview */}
+                <div className="text-left bg-[#080808] border border-white/20 p-6 md:p-8 my-8 relative group">
+                     {/* Decorative corner accents for sharpness */}
+                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/40"></div>
+                     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/40"></div>
+                     <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/40"></div>
+                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/40"></div>
+
+                     <h4 className="text-white text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-emerald-500"></span>
+                        Activation Protocol (Required)
+                     </h4>
+                     
+                     <ul className="space-y-4">
+                        <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">01</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Playlist Prep</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    Create 1 public Spotify playlist with <span className="text-white">100+ approved catalog tracks</span>. No editorial/algo playlists.
+                                </p>
+                            </div>
+                        </li>
+                         <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">02</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Submission</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    Email playlist link + Signed PDF to <span className="text-emerald-400 font-medium border-b border-emerald-500/30">aoi@urbanhippyfantasy.com</span>.
+                                </p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">03</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Processing</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    24-48hr confirmation window.
+                                </p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">04</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Office Hours</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    Mon-Fri 10am-3pm PT. Weekends closed.
+                                </p>
+                            </div>
+                        </li>
+                     </ul>
+                </div>
+
+                <div className="bg-[#0a0a0a] border border-white/10 p-6 md:p-8 text-left mb-8 relative">
+                    <div className="absolute top-0 right-0 p-2 opacity-50">
+                        <CreditCard className="w-4 h-4 text-gray-600" />
                     </div>
-                    <div className="flex justify-between">
-                        <span className="text-gray-500 text-sm">Deposit Due Now</span>
-                        <span className="text-emerald-500 text-sm font-bold">${depositValue.toLocaleString()}</span>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">Payment Authorization</p>
+                    
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                            <span className="text-gray-400 text-sm font-light">Protocol</span>
+                            <span className="text-white text-sm uppercase tracking-wider">{tier.name}</span>
+                        </div>
+                        <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                            <span className="text-gray-400 text-sm font-light">Total Contract Value</span>
+                            <span className="text-gray-300 text-sm">${tier.price.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between items-center pt-2">
+                            <span className="text-white text-sm font-bold uppercase tracking-wider">Deposit Due Now</span>
+                            <span className="text-emerald-500 text-xl font-light tracking-tight">${depositValue.toLocaleString()}</span>
+                        </div>
                     </div>
                 </div>
 
                 <button 
-                    className="w-full py-5 bg-white text-black font-bold uppercase tracking-[0.2em] text-xs hover:bg-emerald-400 hover:border-emerald-400 transition-colors" 
+                    className="w-full py-6 bg-white hover:bg-emerald-400 text-black font-bold uppercase tracking-[0.25em] text-xs transition-all duration-300 flex items-center justify-center gap-4 group" 
                     onClick={handleProceedToPayment}
                 >
-                     'Proceed to Secure Checkout'
+                     Proceed to Secure Checkout <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
 
