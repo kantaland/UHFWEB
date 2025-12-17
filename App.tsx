@@ -1,33 +1,61 @@
-
 import React, { useState } from 'react';
 import { PricingTier, SongConfiguration } from './types';
 import PricingCard from './components/PricingCard';
-import SubscriberSlider from './components/SubscriberSlider';
+import RoiSimulator from './components/RoiSimulator';
 import CheckoutModal from './components/CheckoutModal';
 import PitchDeckModal from './components/PitchDeckModal';
 import CaseStudiesModal from './components/CaseStudiesModal';
 import PrivacyPolicyModal from './components/PrivacyPolicyModal';
-import { Speaker, Play, Music, ShieldCheck } from './components/Icons';
+import FaqModal from './components/FaqModal';
+import { Play, ChevronRight, ArrowRight } from './components/Icons';
+
+// --- Hero Background Component (Kinetic Typography) ---
+const HeroBackground = () => {
+  return (
+    <div className="absolute inset-0 z-0 overflow-hidden bg-[#050505] flex flex-col justify-center select-none pointer-events-none">
+      {/* Background Layer */}
+      <div className="absolute inset-0 bg-black"></div>
+      
+      {/* Kinetic Typography Layer */}
+      <div className="flex flex-col gap-0 opacity-20 relative z-0 scale-110">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className={`flex whitespace-nowrap overflow-hidden ${i % 2 === 0 ? 'animate-scroll-left' : 'animate-scroll-right'}`}>
+            {/* Duplicated content for seamless loop */}
+            {[...Array(20)].map((_, j) => (
+              <span key={j} className="text-[12vh] md:text-[18vh] font-thin tracking-tighter text-white mr-12 leading-[0.85]">
+                URBAN HIPPY FANTASY
+              </span>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Overlays for readability and depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#050505] via-transparent to-[#050505] z-10"></div>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px] z-10"></div>
+    </div>
+  );
+};
 
 function App() {
-  const [currentListeners, setCurrentListeners] = useState<number>(5000);
+  const [currentListeners, setCurrentListeners] = useState<number>(50000); // Kept for legacy state compatibility if needed
   const [songConfig, setSongConfig] = useState<SongConfiguration>({ 
-    count: 3, 
+    count: 100, 
     isValid: true, 
     status: 'safe',
-    message: 'Balanced distribution.' 
+    message: 'Catalog Verified' 
   });
   const [selectedTier, setSelectedTier] = useState<PricingTier | null>(null);
   const [showPitchDeck, setShowPitchDeck] = useState(false);
   const [showCaseStudies, setShowCaseStudies] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showFaq, setShowFaq] = useState(false);
 
-  // New Simplified Tiers: Indie, Breakthrough, Elite
   const tiers: PricingTier[] = [
     {
-      id: 'pack-indie',
-      name: 'Indie Pack',
-      subtitle: 'The essential kickstart for serious independent artists.',
+      id: 'pack-entry',
+      name: 'Entry Protocol',
+      subtitle: 'System compatibility verification.',
       capacity: 1000000,
       capacityLabel: 'Streams',
       price: 3000,
@@ -35,47 +63,46 @@ function App() {
       isLocked: false,
       recommended: false,
       features: [
-        '1 Million Organic Streams',
-        'Official Spotify Playlist Placement',
-        'Algorithmic Triggering',
-        'Monthly Listener Boost',
-        '100% Royalties Eligible'
+        '1 Million Streams Allocation',
+        'Performance Validation',
+        'Backend Compatibility',
+        'Non-Recurring',
+        'Prerequisite for Core'
       ]
     },
     {
-      id: 'pack-breakthrough',
-      name: 'Breakthrough',
-      subtitle: 'Technically enhanced scaling for breaking artists.',
-      capacity: 3000000,
-      capacityLabel: 'Streams',
-      price: 9000, 
+      id: 'pack-annual',
+      name: 'Annual Core',
+      subtitle: 'Consistent monthly asset growth.',
+      capacity: 12000000,
+      capacityLabel: 'Streams / Yr',
+      price: 32400,
       accentColor: 'cyan',
-      isLocked: currentListeners < 10000,
-      requirementText: 'Requires 10k+ Listeners',
+      isLocked: false,
       recommended: true,
       features: [
-        '3 Million Organic Streams',
-        'Advanced Algorithmic Triggering',
-        'High-Impact Editorial Pitching',
-        'Top 5 Geos: US, CA, UK, DE, SE',
-        '100% Royalties Eligible'
+        '1M Streams Per Month',
+        '$5,400 Deposit (2 Mo)',
+        'Monthly Billing',
+        'Royalty Optimization',
+        '12 Month Term'
       ]
     },
     {
-      id: 'pack-elite',
-      name: 'Elite Status',
-      subtitle: 'Total market saturation. Major label dominance.',
-      capacity: 10000000,
-      capacityLabel: 'Streams',
-      price: 30000,
+      id: 'pack-scale',
+      name: 'Global Scale',
+      subtitle: 'Priority release dominance.',
+      capacity: 120000000,
+      capacityLabel: 'Streams / Yr',
+      price: 318000,
       accentColor: 'fuchsia',
-      isLocked: currentListeners < 100000,
-      requirementText: 'Requires 100k+ Listeners',
+      isLocked: false,
       features: [
-        '10 Million Organic Streams',
-        'Organic Monthly Listener Boost',
-        'Dedicated Campaign Manager',
-        'Top 5 Geos: US, CA, UK, DE, SE'
+        '120 Million Streams Total',
+        '$53,000 Deposit (2 Mo)',
+        'Catalog Dominance',
+        'Algorithmic Leverage',
+        'Strategic Alignment'
       ]
     },
   ];
@@ -86,129 +113,170 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white relative overflow-x-hidden selection:bg-lime-400 selection:text-black">
+    <div className="min-h-screen bg-[#050505] text-white relative selection:bg-white selection:text-black font-light overflow-x-hidden">
       
-      {/* Background Ambient Noise */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-fuchsia-600/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-[10%] right-[-5%] w-[30%] h-[30%] bg-lime-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-[40%] left-[60%] w-[20%] h-[20%] bg-cyan-500/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
-        {/* Grid Texture */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-150 contrast-150"></div>
-      </div>
-
-      <div className="relative z-10">
-        
-        {/* Header */}
-        <header className="flex items-center justify-between px-6 py-6 max-w-7xl mx-auto">
-          <div className="flex items-center gap-2 group cursor-pointer z-20">
-            <div className="p-2 bg-white text-black rounded-lg transform group-hover:rotate-12 transition-transform duration-300">
-              <Speaker className="w-5 h-5 sm:w-6 sm:h-6" />
+      {/* Navbar - Sticky Glass */}
+      <nav className="fixed top-0 w-full z-40 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300">
+        <div className="max-w-[1920px] mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+            <div className="flex items-center gap-4 cursor-pointer group" onClick={() => window.scrollTo(0,0)}>
+                <span className="text-xs md:text-sm font-medium tracking-luxury uppercase text-white group-hover:text-gray-300 transition-colors">
+                  Urban Hippy Fantasy
+                </span>
             </div>
-            <span className="font-[Syne] font-bold text-xl sm:text-2xl tracking-tighter">
-              UHF
-            </span>
-          </div>
-        </header>
+            
+            <div className="hidden md:flex items-center gap-8">
+                <button onClick={() => setShowCaseStudies(true)} className="text-xs font-bold uppercase tracking-luxury text-gray-500 hover:text-white transition-colors">About</button>
+                <button onClick={() => setShowPrivacy(true)} className="text-xs font-bold uppercase tracking-luxury text-gray-500 hover:text-white transition-colors">Legal</button>
+                <div className="h-3 w-px bg-white/20"></div>
+                <button onClick={() => setShowPitchDeck(true)} className="text-xs font-bold uppercase tracking-luxury text-white border border-white/30 px-6 py-2.5 hover:bg-white hover:text-black transition-all duration-500 hover:border-white">
+                    Protocol
+                </button>
+            </div>
+            {/* Mobile Menu Button - Simple */}
+            <button onClick={() => setShowPitchDeck(true)} className="md:hidden text-xs font-bold uppercase tracking-luxury border border-white/30 px-5 py-2.5 text-white">
+                Protocol
+            </button>
+        </div>
+      </nav>
 
-        {/* Hero Section */}
-        <section className="text-center pt-10 sm:pt-16 pb-12 px-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md animate-[fadeIn_0.5s_ease-out]">
-            <ShieldCheck className="w-4 h-4 text-cyan-400" />
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-300">Authorized Consultant Access</span>
-          </div>
-          
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-[Syne] leading-[0.95] sm:leading-[0.9] mb-8 uppercase tracking-tight break-words animate-[slideUp_0.5s_ease-out]">
-            Artist Growth <br/>
-            <span className="wild-gradient-text relative inline-block">
-              Architect
-              <Music className="absolute -top-3 -right-6 sm:-top-4 sm:-right-8 w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 text-white opacity-50 rotate-12" />
-            </span>
-          </h1>
-          
-          <p className="text-zinc-300 max-w-xl mx-auto text-lg sm:text-xl leading-loose mb-12 px-2 animate-[slideUp_0.7s_ease-out]">
-            Artist Acceleration Ecosystem. Review real-time metrics with the artist to identify eligibility for backend major label campaign.
-          </p>
+      {/* Hero Section */}
+      <section className="relative pt-24 md:pt-0 min-h-[90vh] md:h-screen flex flex-col justify-center border-b border-white/10 overflow-hidden">
+         {/* Robust Background with Kinetic Typography */}
+         <HeroBackground />
+         
+         <div className="relative z-10 w-full max-w-[1920px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 h-full items-center">
+            
+            <div className="lg:col-span-8 flex flex-col justify-center pt-8 md:pt-0">
+                <div className="flex items-center gap-4 mb-8 md:mb-12">
+                    <div className="w-8 md:w-12 h-px bg-white"></div>
+                    <span className="text-xs font-bold uppercase tracking-[0.3em] text-gray-400">Restricted Access System</span>
+                </div>
+                
+                <h1 className="text-5xl sm:text-6xl md:text-8xl font-extralight uppercase tracking-tight leading-[0.95] mb-8 md:mb-12 text-white">
+                   Catalog <br/>
+                   <span className="font-normal text-gray-500">Acceleration</span>
+                </h1>
 
-          <div className="flex justify-center mb-12 animate-[slideUp_0.9s_ease-out]">
-             <button 
-                onClick={() => setShowPitchDeck(true)}
-                className="px-8 py-4 bg-white text-black font-bold uppercase tracking-widest rounded-full hover:bg-zinc-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 flex items-center gap-2"
-             >
-                <Play className="w-4 h-4 fill-black" /> Launch Presentation Mode
-             </button>
-          </div>
-        </section>
+                <p className="text-gray-300 text-base md:text-lg font-light max-w-lg leading-relaxed mb-12 tracking-wide border-l border-white/20 pl-6">
+                    A closed acceleration system designed exclusively for <span className="text-white">Large Scale Catalogs (100+ Songs)</span>. 
+                    We do not promote singles. We sustain backend velocity across your entire discography.
+                </p>
 
-        {/* Interactive Control */}
-        <SubscriberSlider 
-          value={currentListeners} 
-          onChange={setCurrentListeners} 
-          songConfig={songConfig}
-          onSongConfigChange={setSongConfig}
-        />
+                <div className="flex flex-col sm:flex-row gap-6 mb-12 md:mb-0">
+                    <button 
+                        onClick={() => setShowPitchDeck(true)}
+                        className="group flex items-center gap-6 text-xs md:text-sm font-bold uppercase tracking-luxury text-white hover:text-gray-300 transition-colors"
+                    >
+                        <div className="w-14 h-14 border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
+                            <Play className="w-4 h-4 fill-current" />
+                        </div>
+                        Discover Protocol
+                    </button>
+                </div>
+            </div>
 
-        {/* Pricing Grid */}
-        <section className="px-4 pb-32">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+            {/* Matrix - Mobile Optimized */}
+            <div className="lg:col-span-4 flex flex-col lg:justify-end pb-12 lg:pb-20">
+                <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/10 p-6 md:p-10 mb-[-1px]">
+                    <h3 className="text-xs font-bold uppercase tracking-luxury text-gray-500 mb-6">Eligibility Matrix</h3>
+                    <ul className="space-y-4">
+                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
+                            <div className="w-1.5 h-1.5 bg-white"></div> 100+ Active Songs
+                        </li>
+                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
+                            <div className="w-1.5 h-1.5 bg-white"></div> Major Label Distribution
+                        </li>
+                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
+                             <div className="w-1.5 h-1.5 bg-white"></div> Full Discography Only
+                        </li>
+                    </ul>
+                </div>
+                <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/10 p-6 md:p-10">
+                    <h3 className="text-xs font-bold uppercase tracking-luxury text-gray-500 mb-6">Prohibited</h3>
+                    <p className="text-sm font-light text-gray-400 leading-relaxed">
+                        Single Song Campaigns, EP Only, Catalogs &lt; 100 Songs, DistroKid/Tunecore, Independent Self-Serve.
+                    </p>
+                </div>
+            </div>
+         </div>
+      </section>
+
+      {/* ROI Simulator Section */}
+      <section className="bg-[#080808] border-b border-white/10 py-20 md:py-32">
+        <div className="max-w-[1920px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                <div>
+                    <span className="block text-xs font-bold uppercase tracking-luxury text-gray-500 mb-3">01 — Financial Simulation</span>
+                    <h2 className="text-3xl md:text-4xl font-light uppercase tracking-widest text-white">Projected Returns</h2>
+                </div>
+                <p className="text-sm font-light text-gray-500 max-w-md leading-relaxed text-left md:text-right">
+                    Simulate revenue outcomes based on catalog velocity, contract splits, and algorithmic growth factors over time.
+                </p>
+            </div>
+            
+            <RoiSimulator 
+                initialStreams={currentListeners} 
+                songConfig={songConfig}
+                onSongConfigChange={setSongConfig}
+            />
+        </div>
+      </section>
+
+      {/* Models / Pricing */}
+      <section className="bg-[#050505] py-20 md:py-32">
+        <div className="max-w-[1920px] mx-auto px-6">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                <div>
+                    <span className="block text-xs font-bold uppercase tracking-luxury text-gray-500 mb-3">02 — Execution</span>
+                    <h2 className="text-3xl md:text-4xl font-light uppercase tracking-widest text-white">Select Protocol</h2>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10">
               {tiers.map((tier) => (
                 <PricingCard 
                   key={tier.id} 
                   tier={tier} 
                   onSelect={handleSelectTier}
-                  onViewDetails={() => setShowPitchDeck(true)}
                 />
               ))}
             </div>
-          </div>
-        </section>
+             <div className="flex justify-center mt-16">
+                 <p className="text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] border border-white/10 px-6 py-3 inline-block text-center leading-relaxed">
+                    Streams are deployed in controlled monthly allocations • No guarantees on chart placement
+                </p>
+             </div>
+        </div>
+      </section>
 
-        {/* Footer */}
-        <footer className="border-t border-white/10 bg-black py-12 px-6">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-8 opacity-50 justify-center md:justify-start">
-              <div className="flex items-center gap-2">
-                <Play className="w-5 h-5 fill-current" />
-                <span className="font-bold tracking-tight uppercase">URBAN HIPPY FANTASY</span>
-              </div>
-              
-              {/* Footer Links */}
-              <div className="flex items-center gap-6 mt-4 md:mt-0 text-[10px] sm:text-xs font-bold uppercase tracking-wider">
-                <button 
-                  onClick={() => setShowCaseStudies(true)}
-                  className="hover:text-lime-400 transition-colors"
-                >
-                  About
-                </button>
-                <button 
-                  onClick={() => setShowPrivacy(true)}
-                  className="hover:text-cyan-400 transition-colors"
-                >
-                  Privacy & Policy
-                </button>
-              </div>
+      {/* Footer - Minimalist */}
+      <footer className="bg-white text-black py-16 md:py-24 px-6">
+        <div className="max-w-[1920px] mx-auto">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                <div className="space-y-8">
+                    <h3 className="text-xl md:text-2xl font-medium tracking-luxury uppercase">Urban Hippy Fantasy</h3>
+                    <div className="flex flex-wrap gap-8 text-xs font-bold uppercase tracking-[0.15em]">
+                        <button onClick={() => setShowCaseStudies(true)} className="hover:text-gray-500 transition-colors">About</button>
+                        <button onClick={() => setShowPrivacy(true)} className="hover:text-gray-500 transition-colors">Privacy Policy</button>
+                        <button onClick={() => setShowPitchDeck(true)} className="hover:text-gray-500 transition-colors">Protocol</button>
+                        <button onClick={() => setShowFaq(true)} className="hover:text-gray-500 transition-colors">System Intelligence</button>
+                    </div>
+                </div>
+                <div className="text-left md:text-right">
+                    <p className="text-xs font-bold uppercase tracking-luxury text-gray-400 mb-2">Corporate Entity</p>
+                    <p className="text-sm md:text-sm font-medium uppercase tracking-widest">Urban Hippy Fantasy</p>
+                    <p className="text-[10px] text-gray-400 mt-6 uppercase tracking-widest">© 2024 Registered S-Corp in California.</p>
+                </div>
             </div>
+        </div>
+      </footer>
 
-            <p className="text-zinc-600 text-[10px] md:text-xs max-w-md text-center md:text-right">
-              © 2024 Urban Hippy Fantasy. Parent Company of Kantaland Hollywood (Imprint under AWAL / Sony Music UK). Registered in CA.
-            </p>
-          </div>
-        </footer>
-
-      </div>
-      
-      {/* Checkout Modal (Now Submission Modal) */}
+      {/* Modals */}
       <CheckoutModal tier={selectedTier} onClose={() => setSelectedTier(null)} />
-      
-      {/* Pitch Deck Modal */}
       <PitchDeckModal isOpen={showPitchDeck} onClose={() => setShowPitchDeck(false)} />
-
-      {/* Case Studies (Now About) Modal */}
       <CaseStudiesModal isOpen={showCaseStudies} onClose={() => setShowCaseStudies(false)} />
-
-      {/* Privacy Policy Modal */}
       <PrivacyPolicyModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
+      <FaqModal isOpen={showFaq} onClose={() => setShowFaq(false)} />
     </div>
   );
 }

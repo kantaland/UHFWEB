@@ -28,7 +28,18 @@ import {
   BarChart3,
   Building2,
   ExternalLink,
-  Linkedin
+  Linkedin,
+  Activity,
+  ArrowRight,
+  PieChart,
+  DollarSign,
+  Percent,
+  RefreshCw,
+  Layers,
+  HelpCircle,
+  Download,
+  Sparkles,
+  Send
 } from 'lucide-react';
 
 export { 
@@ -60,5 +71,16 @@ export {
   BarChart3,
   Building2,
   ExternalLink,
-  Linkedin
+  Linkedin,
+  Activity,
+  ArrowRight,
+  PieChart,
+  DollarSign,
+  Percent,
+  RefreshCw,
+  Layers,
+  HelpCircle,
+  Download,
+  Sparkles,
+  Send
 };
