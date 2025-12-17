@@ -6,7 +6,6 @@ import CheckoutModal from './components/CheckoutModal';
 import PitchDeckModal from './components/PitchDeckModal';
 import CaseStudiesModal from './components/CaseStudiesModal';
 import PrivacyPolicyModal from './components/PrivacyPolicyModal';
-import FaqModal from './components/FaqModal';
 import { Play, ChevronRight, ArrowRight, Globe } from './components/Icons';
 
 // --- Hero Background Component (Kinetic Typography) ---
@@ -43,7 +42,6 @@ function App() {
   const [showPitchDeck, setShowPitchDeck] = useState(false);
   const [showCaseStudies, setShowCaseStudies] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
-  const [showFaq, setShowFaq] = useState(false);
 
   const tiers: PricingTier[] = [
     {
@@ -217,7 +215,6 @@ function App() {
                     <div className="flex flex-wrap gap-8 text-xs font-bold uppercase tracking-[0.15em]">
                         <button onClick={() => setShowCaseStudies(true)} className="hover:text-emerald-600 transition-colors">About</button>
                         <button onClick={() => setShowPrivacy(true)} className="hover:text-emerald-600 transition-colors">Privacy</button>
-                        <button onClick={() => setShowFaq(true)} className="hover:text-emerald-600 transition-colors">Intelligence</button>
                         <a href="https://github.com/urbanhippy" target="_blank" className="hover:text-emerald-600 transition-colors flex items-center gap-2">
                              System Source
                         </a>
@@ -235,7 +232,6 @@ function App() {
       <PitchDeckModal isOpen={showPitchDeck} onClose={() => setShowPitchDeck(false)} />
       <CaseStudiesModal isOpen={showCaseStudies} onClose={() => setShowCaseStudies(false)} />
       <PrivacyPolicyModal isOpen={showPrivacy} onClose={() => setShowPrivacy(false)} />
-      <FaqModal isOpen={showFaq} onClose={() => setShowFaq(false)} />
     </div>
   );
 }
