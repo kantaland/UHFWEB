@@ -164,6 +164,10 @@ function App() {
       window.open('https://www.paypal.com/ncp/payment/FCTWVBQCVEAHJ', '_blank');
       return;
     }
+    if (id === 'pack-lite') {
+      window.open('https://www.paypal.com/ncp/payment/UBRPHCBAW788C', '_blank');
+      return;
+    }
     const tier = tiers.find(t => t.id === id);
     if (tier) setSelectedTier(tier);
   };
