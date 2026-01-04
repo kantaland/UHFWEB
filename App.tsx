@@ -272,7 +272,6 @@ function App() {
                         <button onClick={() => setShowCaseStudies(true)} className="hover:text-gray-500 transition-colors">About</button>
                         <button onClick={() => setShowPrivacy(true)} className="hover:text-gray-500 transition-colors">Privacy Policy</button>
                         <button onClick={() => setShowPitchDeck(true)} className="hover:text-gray-500 transition-colors">Protocol</button>
-                        <button onClick={() => setShowFaq(true)} className="hover:text-gray-500 transition-colors">System Intelligence</button>
                     </div>
                 </div>
                 <div className="text-left md:text-right">
