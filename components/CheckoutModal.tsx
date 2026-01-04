@@ -35,7 +35,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
 
   if (!tier) return null;
 
-  const depositValue = (tier.id === 'pack-nano' || tier.id === 'pack-micro' || tier.id === 'pack-lite' || tier.id === 'pack-entry') ? tier.price : (tier.id === 'pack-annual' ? 5400 : 53000);
+  const depositValue = tier.id === 'pack-entry' ? tier.price : (tier.id === 'pack-annual' ? 5400 : 53000);
   const currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   // Dynamic Agreement Generation
@@ -44,11 +44,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     let deliveryText = "";
     let paymentText = "";
 
-    if (tier.id === 'pack-nano' || tier.id === 'pack-micro' || tier.id === 'pack-lite') {
-        scopeText = `resulting in the delivery of approximately ${tier.capacity.toLocaleString()} Spotify streams. Singles and EPs are welcome with no minimum catalog size requirements.`;
-        deliveryText = "Streams are expected to be delivered within an estimated 14–45 day window from campaign initiation.";
-        paymentText = `Client agrees to pay the total contract value of $${tier.price.toLocaleString()} in full upon execution to secure allocation and initiate the service.`;
-    } else if (tier.id === 'pack-entry') {
+    if (tier.id === 'pack-entry') {
         scopeText = "resulting in the delivery of approximately one million (1,000,000) Spotify streams.";
         deliveryText = "Streams are expected to be delivered within an estimated 30–90 day window from campaign initiation.";
         paymentText = `Client agrees to pay the total contract value of $${tier.price.toLocaleString()} in full upon execution to secure allocation and initiate the service.`;
@@ -65,7 +61,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     const sections = [
         {
             title: "1. SCOPE OF SERVICES",
-            body: `Provider does not distribute, upload, host, modify, or control any sound recordings.\n\nAll recordings subject to this Agreement are pre-distributed and fully controlled by the Client through its selected distributor or major-label distribution system.\n\nProvider’s services are limited strictly to off-platform traffic facilitation and audience discovery activity directed toward the Client’s existing Spotify-distributed catalog, ${scopeText}\n\nStreams are delivered:\n- Exclusively on Spotify\n- Across Geo1 countries\n- Singles and EPs are permitted\n- Structured to support sustainable listening behavior and platform compliance\n\nThis service is designed for long-term catalog sustainability, not short-term chart manipulation.`
+            body: `Provider does not distribute, upload, host, modify, or control any sound recordings.\n\nAll recordings subject to this Agreement are pre-distributed and fully controlled by the Client through its selected distributor or major-label distribution system.\n\nProvider’s services are limited strictly to off-platform traffic facilitation and audience discovery activity directed toward the Client’s existing Spotify-distributed catalog, ${scopeText}\n\nStreams are delivered:\n- Exclusively on Spotify\n- Across Geo1 countries\n- Across multiple tracks and catalog assets (100+ songs where applicable)\n- Structured to support sustainable listening behavior and platform compliance\n\nThis service is designed for long-term catalog sustainability, not short-term chart manipulation.`
         },
         {
             title: "2. DELIVERY WINDOW",
@@ -146,7 +142,7 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     ];
 
     // Append strict annual clauses for Annual and Scale plans
-    if (tier.id !== 'pack-nano' && tier.id !== 'pack-micro' && tier.id !== 'pack-lite' && tier.id !== 'pack-entry') {
+    if (tier.id !== 'pack-entry') {
         const annualVolume = tier.id === 'pack-annual' ? '12,000,000' : '120,000,000';
         const planName = tier.id === 'pack-annual' ? '12M Annual' : '120M Annual';
 
@@ -471,222 +467,249 @@ const CheckoutModal: React.FC<CheckoutModalProps> = ({ tier, onClose }) => {
     if (tier.id === 'pack-annual') {
         window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-6PG18869JV642600TNFBD5II', '_blank');
     } else if (tier.id === 'pack-scale') {
-        window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-94P7227546419741VTNFBD7Y', '_blank');
+        window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-6V694153PN622930PNFBDZHQ', '_blank');
     } else if (tier.id === 'pack-entry') {
-        window.open('https://buy.stripe.com/5kA1737eC2gTfTidQU', '_blank');
-    } else if (tier.id === 'pack-nano') {
-        window.open('https://buy.stripe.com/fZe3ff6ay08L5uEaES', '_blank');
-    } else if (tier.id === 'pack-micro') {
-        window.open('https://buy.stripe.com/cN24jj7eCaRr5uEdQT', '_blank');
-    } else if (tier.id === 'pack-lite') {
-        window.open('https://buy.stripe.com/14kbLL3YqdZzfTi7sA', '_blank');
+        window.open('https://www.paypal.com/webapps/billing/plans/subscribe?plan_id=P-5KT00357JY0333253NFBD7DA', '_blank');
+    } else {
+        onClose();
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-8">
       <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" onClick={onClose}></div>
-      
-      <div className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 overflow-hidden shadow-2xl">
-        {/* Progress Bar */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
-            <div 
-                className="h-full bg-white transition-all duration-700 ease-out"
-                style={{ width: step === 'details' ? '25%' : step === 'processing' ? '50%' : step === 'contract' ? '75%' : '100%' }}
-            ></div>
+
+      <div className="relative w-full h-full md:max-w-2xl md:max-h-[90vh] bg-black border border-white/20 flex flex-col animate-[fadeIn_0.3s_ease-out] shadow-2xl overflow-hidden">
+        
+        {/* Header */}
+        <div className="flex items-center justify-between p-8 border-b border-white/10 shrink-0 bg-black z-10">
+            <h3 className="text-xl font-light uppercase tracking-wide text-white">
+                {step === 'success' ? 'Protocol Active' : step === 'contract' ? 'Execute Agreement' : 'Application Protocol'}
+            </h3>
+            <button onClick={onClose} className="p-2 text-gray-500 hover:text-white transition-colors"><X className="w-6 h-6" /></button>
         </div>
 
-        <button onClick={onClose} className="absolute top-6 right-6 text-gray-500 hover:text-white transition-colors z-10">
-          <X className="w-6 h-6" />
-        </button>
-
-        <div className="p-8 sm:p-12">
-            {/* --- DETAILS STEP --- */}
-            {step === 'details' && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                    <div className="mb-10">
-                        <span className="text-xs font-bold uppercase tracking-luxury text-gray-500 block mb-2">Checkout Protocol</span>
-                        <h2 className="text-3xl font-light uppercase tracking-widest text-white">System Initiation</h2>
-                    </div>
-
-                    <div className="bg-white/5 p-6 mb-10 border-l-2 border-white">
-                        <div className="flex justify-between items-center mb-1">
-                            <span className="text-sm font-medium text-white uppercase tracking-wider">{tier.name}</span>
-                            <span className="text-xl font-light text-white">${tier.price.toLocaleString()}</span>
-                        </div>
-                        <p className="text-xs text-gray-500 uppercase tracking-widest">{tier.subtitle}</p>
-                    </div>
-
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label className="block text-[10px] font-bold uppercase tracking-luxury text-gray-500 mb-2">Distributor</label>
-                                <select 
-                                    className={`w-full bg-black border ${errors.distributor ? 'border-red-500' : 'border-white/10'} px-4 py-3 text-sm text-white focus:border-white outline-none transition-colors appearance-none`}
-                                    value={formData.distributor}
-                                    onChange={(e) => setFormData({...formData, distributor: e.target.value})}
-                                >
-                                    <option value="">Select Partner</option>
-                                    <option value="major">Major Label (Universal/Sony/Warner)</option>
-                                    <option value="empire">EMPIRE</option>
-                                    <option value="orchard">The Orchard</option>
-                                    <option value="united">UnitedMasters</option>
-                                    <option value="vydia">Vydia</option>
-                                    <option value="other">Other High-Level Distro</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-[10px] font-bold uppercase tracking-luxury text-gray-500 mb-2">Label Website / Social</label>
-                                <input 
-                                    type="text" 
-                                    placeholder="yourlabel.com"
-                                    className={`w-full bg-black border ${errors.website ? 'border-red-500' : 'border-white/10'} px-4 py-3 text-sm text-white focus:border-white outline-none transition-colors`}
-                                    value={formData.website}
-                                    onChange={(e) => setFormData({...formData, website: e.target.value})}
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-luxury text-gray-500 mb-2">Communication Channel (Email)</label>
-                            <input 
-                                type="email" 
-                                placeholder="contact@yourlabel.com"
-                                className={`w-full bg-black border ${errors.email ? 'border-red-500' : 'border-white/10'} px-4 py-3 text-sm text-white focus:border-white outline-none transition-colors`}
-                                value={formData.email}
-                                onChange={(e) => setFormData({...formData, email: e.target.value})}
-                            />
-                        </div>
-
-                        <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-luxury text-gray-500 mb-2">Affiliate / Partner Code (Optional)</label>
-                            <input 
-                                type="text" 
-                                placeholder="PROMO-2024"
-                                className="w-full bg-black border border-white/10 px-4 py-3 text-sm text-white focus:border-white outline-none transition-colors"
-                                value={formData.affiliateCode}
-                                onChange={(e) => setFormData({...formData, affiliateCode: e.target.value})}
-                            />
-                        </div>
-
-                        <div className="pt-4">
-                            <label className="flex items-start gap-4 cursor-pointer group">
-                                <div className={`mt-1 w-5 h-5 border ${errors.policy ? 'border-red-500' : 'border-white/20'} flex items-center justify-center group-hover:border-white transition-colors`}>
-                                    {agreedToPolicy && <Check className="w-3 h-3 text-white" />}
-                                </div>
-                                <input 
-                                    type="checkbox" 
-                                    className="hidden" 
-                                    checked={agreedToPolicy}
-                                    onChange={(e) => setAgreedToPolicy(e.target.checked)}
-                                />
-                                <span className="text-xs text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
-                                    I acknowledge that this is a <span className="text-white">Professional Service Agreement</span>. All payments are non-refundable upon campaign initiation.
-                                </span>
-                            </label>
-                        </div>
-
-                        <button 
-                            type="submit"
-                            className="w-full bg-white text-black py-5 text-xs font-bold uppercase tracking-luxury hover:bg-gray-200 transition-all flex items-center justify-center gap-3 mt-8"
-                        >
-                            Execute Protocol <ArrowRight className="w-4 h-4" />
-                        </button>
-                    </form>
-                </div>
-            )}
-
-            {/* --- PROCESSING STEP --- */}
-            {step === 'processing' && (
-                <div className="py-20 text-center animate-in fade-in duration-700">
-                    <div className="w-16 h-16 border-2 border-white/10 border-t-white rounded-full animate-spin mx-auto mb-10"></div>
-                    <p className="text-xs font-bold uppercase tracking-luxury text-gray-500 animate-pulse">{loadingStatus}</p>
-                </div>
-            )}
-
-            {/* --- CONTRACT STEP --- */}
-            {step === 'contract' && (
-                <div className="animate-in fade-in zoom-in-95 duration-500">
-                    <div className="flex justify-between items-start mb-10">
-                        <div>
-                            <span className="text-xs font-bold uppercase tracking-luxury text-gray-500 block mb-2">Step 02 / 03</span>
-                            <h2 className="text-3xl font-light uppercase tracking-widest text-white">Review Agreement</h2>
-                        </div>
-                        <div className="flex items-center gap-3 text-emerald-500">
-                            <ShieldCheck className="w-5 h-5" />
-                            <span className="text-[10px] font-bold uppercase tracking-luxury">Verified</span>
-                        </div>
-                    </div>
-
-                    <div className="bg-white/5 border border-white/10 p-6 h-[300px] overflow-y-auto mb-10 custom-scrollbar">
-                        <div className="space-y-8">
-                            {getAgreementSections().map((section: any, idx: number) => (
-                                <div key={idx} className="space-y-3">
-                                    <h4 className="text-[10px] font-bold text-white uppercase tracking-widest">{section.title}</h4>
-                                    <p className="text-xs text-gray-400 leading-relaxed whitespace-pre-wrap">{section.body}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="space-y-6">
-                        <div>
-                            <label className="block text-[10px] font-bold uppercase tracking-luxury text-gray-500 mb-2">Digital Signature (Full Name)</label>
-                            <input 
-                                type="text" 
-                                placeholder="Enter full legal name"
-                                className={`w-full bg-black border ${errors.signature ? 'border-red-500' : 'border-white/10'} px-4 py-4 text-base italic text-white focus:border-white outline-none transition-colors`}
-                                value={signature}
-                                onChange={(e) => setSignature(e.target.value)}
-                            />
-                            {errors.signature && <p className="text-[10px] text-red-500 uppercase mt-2 font-bold tracking-widest">{errors.signature}</p>}
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row gap-4">
-                            <button 
-                                onClick={handleDownloadContract}
-                                className="flex-1 border border-white/20 text-white py-5 text-xs font-bold uppercase tracking-luxury hover:bg-white/5 transition-all flex items-center justify-center gap-3"
-                            >
-                                <Download className="w-4 h-4" /> Download PDF
-                            </button>
-                            <button 
-                                onClick={handleSignContract}
-                                className="flex-1 bg-white text-black py-5 text-xs font-bold uppercase tracking-luxury hover:bg-gray-200 transition-all flex items-center justify-center gap-3"
-                            >
-                                Sign & Finalize <ChevronRight className="w-4 h-4" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
-
+        <div className="p-8 md:p-12 overflow-y-auto custom-scrollbar flex-1">
+            
             {/* --- SUCCESS STEP --- */}
             {step === 'success' ? (
               <div className="text-center py-8">
-                <div className="w-20 h-20 bg-emerald-500/10 border border-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
-                  <Check className="w-10 h-10 text-emerald-500" />
+                <div className="w-16 h-16 border border-white flex items-center justify-center mx-auto mb-8 rounded-none bg-emerald-900/20 border-emerald-500/50">
+                    <Check className="w-8 h-8 text-emerald-500" />
                 </div>
-                <h2 className="text-3xl font-light uppercase tracking-widest text-white mb-4">Protocol Ready</h2>
-                <p className="text-gray-400 text-sm mb-10 max-w-sm mx-auto leading-relaxed">
-                  The service agreement has been digitally executed. Complete the deposit to initiate catalog acceleration.
+                <h3 className="text-3xl font-light text-white uppercase mb-4">Contract Executed</h3>
+                <p className="text-gray-400 text-base mb-8 max-w-sm mx-auto leading-relaxed">
+                    Agreement stored on secure ledger. Please download your copy below (includes Activation Instructions) before proceeding to payment.
                 </p>
+                
+                <button 
+                    onClick={handleDownloadContract}
+                    className="w-full py-4 border border-white/20 text-white font-bold uppercase tracking-[0.2em] text-xs hover:bg-white hover:text-black hover:border-white transition-colors flex items-center justify-center gap-3 mb-4"
+                >
+                    <Download className="w-4 h-4" /> Download Signed Copy (PDF)
+                </button>
 
-                <div className="space-y-4">
+                {/* Activation Instructions Preview */}
+                <div className="text-left bg-[#080808] border border-white/20 p-6 md:p-8 my-8 relative group">
+                     {/* Decorative corner accents for sharpness */}
+                     <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/40"></div>
+                     <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/40"></div>
+                     <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/40"></div>
+                     <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/40"></div>
+
+                     <h4 className="text-white text-xs md:text-sm font-bold uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-emerald-500"></span>
+                        Activation Protocol (Required)
+                     </h4>
+                     
+                     <ul className="space-y-4">
+                        <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">01</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Playlist Prep</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    Create 1 public Spotify playlist with <span className="text-white">100+ approved catalog tracks</span>. No editorial/algo playlists.
+                                </p>
+                            </div>
+                        </li>
+                         <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">02</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Submission</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    Email playlist link + Signed PDF to <span className="text-emerald-400 font-medium border-b border-emerald-500/30">aoi@urbanhippyfantasy.com</span>.
+                                </p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">03</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Processing</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    24-48hr confirmation window.
+                                </p>
+                            </div>
+                        </li>
+                        <li className="flex items-start gap-3">
+                            <span className="text-emerald-500 font-bold text-sm mt-0.5">04</span>
+                            <div>
+                                <strong className="text-white text-sm font-bold uppercase tracking-wider block mb-1">Office Hours</strong>
+                                <p className="text-gray-300 text-sm leading-relaxed font-normal">
+                                    Mon-Fri 10am-3pm PT. Weekends closed.
+                                </p>
+                            </div>
+                        </li>
+                     </ul>
+                </div>
+
+                <div className="bg-[#0a0a0a] border border-white/10 p-6 md:p-8 text-left mb-8 relative">
+                    <div className="absolute top-0 right-0 p-2 opacity-50">
+                        <CreditCard className="w-4 h-4 text-gray-600" />
+                    </div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-6">Payment Authorization</p>
+                    
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                            <span className="text-gray-400 text-sm font-light">Protocol</span>
+                            <span className="text-white text-sm uppercase tracking-wider">{tier.name}</span>
+                        </div>
+                        <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                            <span className="text-gray-400 text-sm font-light">Total Contract Value</span>
+                            <span className="text-gray-300 text-sm">${tier.price.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between items-center pt-2">
+                            <span className="text-white text-sm font-bold uppercase tracking-wider">Deposit Due Now</span>
+                            <span className="text-emerald-500 text-xl font-light tracking-tight">${depositValue.toLocaleString()}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button 
+                    className="w-full py-6 bg-white hover:bg-emerald-400 text-black font-bold uppercase tracking-[0.25em] text-xs transition-all duration-300 flex items-center justify-center gap-4 group" 
+                    onClick={handleProceedToPayment}
+                >
+                     Proceed to Secure Checkout <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+
+            /* --- PROCESSING STEP --- */
+            ) : step === 'processing' ? (
+              <div className="text-center py-24">
+                <div className="w-12 h-12 border-t-2 border-white rounded-full animate-spin mx-auto mb-8"></div>
+                <p className="text-sm font-bold uppercase tracking-[0.2em] text-white animate-pulse">{loadingStatus}</p>
+              </div>
+
+            /* --- CONTRACT STEP --- */
+            ) : step === 'contract' ? (
+                <div className="space-y-8">
+                    <div className="border border-white/10 bg-[#0a0a0a] p-6 h-64 overflow-y-auto font-mono text-xs text-gray-400 leading-relaxed custom-scrollbar">
+                        <p className="mb-4 text-white font-bold uppercase tracking-widest border-b border-white/10 pb-2 sticky top-0 bg-[#0a0a0a]">
+                            SERVICE AGREEMENT: {tier.name.toUpperCase()} PROTOCOL
+                        </p>
+                        <p className="mb-6">
+                            <strong>Effective Date:</strong> {currentDate}<br/>
+                            <strong>Provider:</strong> Urban Hippy Fantasy (Registered S-Corp in California)<br/>
+                            <strong>Client:</strong> {formData.website}<br/>
+                        </p>
+                        {getAgreementSections().map((section, idx) => (
+                             <div key={idx} className="mb-6">
+                                <strong className="block mb-2 text-white">{section.title}</strong>
+                                <p className="whitespace-pre-wrap text-gray-400">{section.body}</p>
+                             </div>
+                        ))}
+                    </div>
+
+                    <div className="space-y-4">
+                        <div className="flex justify-between items-end">
+                            <label className="block text-xs font-bold uppercase tracking-[0.2em] text-emerald-500 mb-2">Digital Signature</label>
+                            <span className="text-xs text-gray-500 font-mono">{currentDate}</span>
+                        </div>
+                        <input 
+                            type="text" 
+                            className="w-full bg-[#050505] border border-white/20 py-4 px-4 text-base text-white focus:outline-none focus:border-white transition-colors font-mono"
+                            placeholder="Type Full Name to Sign"
+                            value={signature}
+                            onChange={(e) => setSignature(e.target.value)}
+                        />
+                        {errors.signature && <p className="text-red-500 text-xs">{errors.signature}</p>}
+                    </div>
+
                     <button 
-                        onClick={handleProceedToPayment}
-                        className="w-full bg-emerald-500 text-white py-6 text-xs font-bold uppercase tracking-luxury hover:bg-emerald-600 transition-all flex items-center justify-center gap-4"
+                        onClick={handleSignContract}
+                        className="w-full py-5 bg-white hover:bg-gray-200 text-black font-bold uppercase tracking-[0.2em] text-xs transition-colors flex items-center justify-center gap-4 mt-8"
                     >
-                        <CreditCard className="w-5 h-5" /> Proceed to Secure Payment
-                    </button>
-                    <button 
-                        onClick={handleDownloadContract}
-                        className="w-full border border-white/10 text-gray-500 py-4 text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all flex items-center justify-center gap-3"
-                    >
-                        <FileText className="w-4 h-4" /> Download Final Agreement
+                        Sign & Execute Agreement <ShieldCheck className="w-4 h-4" />
                     </button>
                 </div>
-              </div>
-            ) : null}
+
+            /* --- DETAILS FORM STEP --- */
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-10">
+                <div className="grid gap-2">
+                    <label className="text-xs font-bold uppercase tracking-[0.2em] text-gray-500">Target Config</label>
+                    <div className="text-3xl font-light text-white">{tier.name}</div>
+                </div>
+
+                <div className="space-y-8">
+                    <div className="group">
+                        <label className="block text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3">Label Website</label>
+                        <input 
+                            type="text" 
+                            className="w-full bg-transparent border-b border-white/20 py-4 text-base text-white focus:outline-none focus:border-white transition-colors rounded-none placeholder-gray-700 font-light"
+                            placeholder="www.yourlabel.com"
+                            value={formData.website}
+                            onChange={(e) => setFormData({...formData, website: e.target.value})}
+                        />
+                        {errors.website && <p className="text-red-500 text-xs mt-2">{errors.website}</p>}
+                    </div>
+                    <div className="group">
+                        <label className="block text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3">Distribution Partner</label>
+                        <input 
+                            type="text" 
+                            className="w-full bg-transparent border-b border-white/20 py-4 text-base text-white focus:outline-none focus:border-white transition-colors rounded-none placeholder-gray-700 font-light"
+                            placeholder="Major Label / Affiliate"
+                            value={formData.distributor}
+                            onChange={(e) => setFormData({...formData, distributor: e.target.value})}
+                        />
+                         {errors.distributor && <p className="text-red-500 text-xs mt-2">{errors.distributor}</p>}
+                    </div>
+                    <div className="group">
+                        <label className="block text-xs font-bold uppercase tracking-[0.2em] text-gray-500 mb-3">Contact Email</label>
+                        <input 
+                            type="email" 
+                            className="w-full bg-transparent border-b border-white/20 py-4 text-base text-white focus:outline-none focus:border-white transition-colors rounded-none placeholder-gray-700 font-light"
+                            placeholder="management@label.com"
+                            value={formData.email}
+                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        />
+                         {errors.email && <p className="text-red-500 text-xs mt-2">{errors.email}</p>}
+                    </div>
+                </div>
+
+                <div className="border border-white/10 p-6 bg-[#0a0a0a]">
+                     <div className="flex items-start gap-4">
+                        <input 
+                            type="checkbox" 
+                            id="policy"
+                            className="mt-1 w-5 h-5 rounded-none border-white/30 bg-transparent focus:ring-0 checked:bg-white"
+                            checked={agreedToPolicy}
+                            onChange={(e) => setAgreedToPolicy(e.target.checked)}
+                        />
+                        <label htmlFor="policy" className="text-sm text-gray-400 leading-relaxed cursor-pointer select-none">
+                            I certify this release is distributed via a Major Label system. I confirm 100+ Active Songs. I understand Independent/DistroKid releases are ineligible.
+                        </label>
+                     </div>
+                     {errors.policy && <p className="text-red-500 text-xs mt-3 ml-9">{errors.policy}</p>}
+                </div>
+
+                <button 
+                    type="submit" 
+                    className="w-full py-5 bg-white hover:bg-gray-200 text-black font-bold uppercase tracking-[0.2em] text-xs transition-colors flex items-center justify-center gap-4"
+                >
+                    Submit for Verification <ChevronRight className="w-4 h-4" />
+                </button>
+              </form>
+            )}
         </div>
       </div>
     </div>

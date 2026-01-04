@@ -48,17 +48,17 @@ function App() {
     {
       id: 'pack-nano',
       name: 'Nano Protocol',
-      subtitle: 'Singles & EPs welcome. No catalog minimum.',
+      subtitle: 'Entry-level stream acceleration.',
       capacity: 10000,
       capacityLabel: 'Streams',
-      price: 29,
+      price: 30,
       accentColor: 'lime',
       isLocked: false,
       recommended: false,
       features: [
         '10,000 Streams Allocation',
-        'Singles & EPs Compatible',
-        'No Song Minimum',
+        'Performance Validation',
+        'Backend Compatibility',
         'Non-Recurring',
         'System Access'
       ]
@@ -66,17 +66,17 @@ function App() {
     {
       id: 'pack-micro',
       name: 'Micro Protocol',
-      subtitle: 'Singles & EPs welcome. No catalog minimum.',
+      subtitle: 'Focused catalog momentum.',
       capacity: 50000,
       capacityLabel: 'Streams',
-      price: 147,
+      price: 150,
       accentColor: 'cyan',
       isLocked: false,
       recommended: false,
       features: [
         '50,000 Streams Allocation',
-        'Singles & EPs Compatible',
-        'No Song Minimum',
+        'Enhanced Velocity',
+        'Algorithmic Warmup',
         'Non-Recurring',
         'Performance Support'
       ]
@@ -84,17 +84,17 @@ function App() {
     {
       id: 'pack-lite',
       name: 'Lite Protocol',
-      subtitle: 'Singles & EPs welcome. No catalog minimum.',
-      capacity: 100000,
+      subtitle: 'Strategic stream dominance.',
+      capacity: 10000,
       capacityLabel: 'Streams',
-      price: 297,
+      price: 300,
       accentColor: 'fuchsia',
       isLocked: false,
       recommended: false,
       features: [
         '100,000 Streams Allocation',
-        'Singles & EPs Compatible',
-        'No Song Minimum',
+        'Catalog Dominance',
+        'Priority Processing',
         'Non-Recurring',
         'Strategic Alignment'
       ]
@@ -215,20 +215,20 @@ function App() {
                     <h3 className="text-xs font-bold uppercase tracking-luxury text-gray-500 mb-6">Eligibility Matrix</h3>
                     <ul className="space-y-4">
                         <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
-                            <div className="w-1.5 h-1.5 bg-white"></div> 100+ Songs (Protocol Core)
-                        </li>
-                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
-                            <div className="w-1.5 h-1.5 bg-white"></div> Singles & EPs (Nano/Micro/Lite)
+                            <div className="w-1.5 h-1.5 bg-white"></div> 100+ Active Songs
                         </li>
                         <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
                             <div className="w-1.5 h-1.5 bg-white"></div> Major Label Distribution
+                        </li>
+                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
+                             <div className="w-1.5 h-1.5 bg-white"></div> Full Discography Only
                         </li>
                     </ul>
                 </div>
                 <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/10 p-6 md:p-10">
                     <h3 className="text-xs font-bold uppercase tracking-luxury text-gray-500 mb-6">Prohibited</h3>
                     <p className="text-sm font-light text-gray-400 leading-relaxed">
-                        Independent Self-Serve (DistroKid/Tunecore), Unreleased Content, Fraudulent Metadata.
+                        Single Song Campaigns, EP Only, Catalogs &lt; 100 Songs, DistroKid/Tunecore, Independent Self-Serve.
                     </p>
                 </div>
             </div>
@@ -272,6 +272,7 @@ function App() {
                         <button onClick={() => setShowCaseStudies(true)} className="hover:text-gray-500 transition-colors">About</button>
                         <button onClick={() => setShowPrivacy(true)} className="hover:text-gray-500 transition-colors">Privacy Policy</button>
                         <button onClick={() => setShowPitchDeck(true)} className="hover:text-gray-500 transition-colors">Protocol</button>
+                        <button onClick={() => setShowFaq(true)} className="hover:text-gray-500 transition-colors">System Intelligence</button>
                     </div>
                 </div>
                 <div className="text-left md:text-right">
