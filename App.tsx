@@ -72,7 +72,7 @@ function App() {
       price: 150,
       accentColor: 'cyan',
       isLocked: false,
-      recommended: true,
+      recommended: false,
       features: [
         '50,000 Streams Allocation',
         'Enhanced Velocity',
@@ -85,16 +85,71 @@ function App() {
       id: 'pack-lite',
       name: 'Lite Protocol',
       subtitle: 'Strategic stream dominance.',
-      capacity: 100000,
+      capacity: 10000,
       capacityLabel: 'Streams',
       price: 300,
       accentColor: 'fuchsia',
       isLocked: false,
+      recommended: false,
       features: [
         '100,000 Streams Allocation',
         'Catalog Dominance',
         'Priority Processing',
         'Non-Recurring',
+        'Strategic Alignment'
+      ]
+    },
+    {
+      id: 'pack-entry',
+      name: 'Entry Protocol',
+      subtitle: 'System compatibility verification.',
+      capacity: 1000000,
+      capacityLabel: 'Streams',
+      price: 3000,
+      accentColor: 'lime',
+      isLocked: false,
+      recommended: false,
+      features: [
+        '1 Million Streams Allocation',
+        'Performance Validation',
+        'Backend Compatibility',
+        'Non-Recurring',
+        'Prerequisite for Core'
+      ]
+    },
+    {
+      id: 'pack-annual',
+      name: 'Annual Core',
+      subtitle: 'Consistent monthly asset growth.',
+      capacity: 12000000,
+      capacityLabel: 'Streams / Yr',
+      price: 32400,
+      accentColor: 'cyan',
+      isLocked: false,
+      recommended: true,
+      features: [
+        '1M Streams Per Month',
+        '$5,400 Deposit (2 Mo)',
+        'Monthly Billing',
+        'Royalty Optimization',
+        '12 Month Term'
+      ]
+    },
+    {
+      id: 'pack-scale',
+      name: 'Global Scale',
+      subtitle: 'Priority release dominance.',
+      capacity: 120000000,
+      capacityLabel: 'Streams / Yr',
+      price: 318000,
+      accentColor: 'fuchsia',
+      isLocked: false,
+      recommended: false,
+      features: [
+        '120 Million Streams Total',
+        '$53,000 Deposit (2 Mo)',
+        'Catalog Dominance',
+        'Algorithmic Leverage',
         'Strategic Alignment'
       ]
     },
