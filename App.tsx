@@ -48,7 +48,7 @@ function App() {
     {
       id: 'pack-nano',
       name: 'Nano Protocol',
-      subtitle: 'Entry-level stream acceleration.',
+      subtitle: 'Singles & EPs welcome. No catalog minimum.',
       capacity: 10000,
       capacityLabel: 'Streams',
       price: 29,
@@ -57,8 +57,8 @@ function App() {
       recommended: false,
       features: [
         '10,000 Streams Allocation',
-        'Performance Validation',
-        'Backend Compatibility',
+        'Singles & EPs Compatible',
+        'No Song Minimum',
         'Non-Recurring',
         'System Access'
       ]
@@ -66,7 +66,7 @@ function App() {
     {
       id: 'pack-micro',
       name: 'Micro Protocol',
-      subtitle: 'Focused catalog momentum.',
+      subtitle: 'Singles & EPs welcome. No catalog minimum.',
       capacity: 50000,
       capacityLabel: 'Streams',
       price: 147,
@@ -75,8 +75,8 @@ function App() {
       recommended: false,
       features: [
         '50,000 Streams Allocation',
-        'Enhanced Velocity',
-        'Algorithmic Warmup',
+        'Singles & EPs Compatible',
+        'No Song Minimum',
         'Non-Recurring',
         'Performance Support'
       ]
@@ -84,8 +84,8 @@ function App() {
     {
       id: 'pack-lite',
       name: 'Lite Protocol',
-      subtitle: 'Strategic stream dominance.',
-      capacity: 10000,
+      subtitle: 'Singles & EPs welcome. No catalog minimum.',
+      capacity: 100000,
       capacityLabel: 'Streams',
       price: 297,
       accentColor: 'fuchsia',
@@ -93,8 +93,8 @@ function App() {
       recommended: false,
       features: [
         '100,000 Streams Allocation',
-        'Catalog Dominance',
-        'Priority Processing',
+        'Singles & EPs Compatible',
+        'No Song Minimum',
         'Non-Recurring',
         'Strategic Alignment'
       ]
@@ -215,20 +215,20 @@ function App() {
                     <h3 className="text-xs font-bold uppercase tracking-luxury text-gray-500 mb-6">Eligibility Matrix</h3>
                     <ul className="space-y-4">
                         <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
-                            <div className="w-1.5 h-1.5 bg-white"></div> 100+ Active Songs
+                            <div className="w-1.5 h-1.5 bg-white"></div> 100+ Songs (Protocol Core)
+                        </li>
+                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
+                            <div className="w-1.5 h-1.5 bg-white"></div> Singles & EPs (Nano/Micro/Lite)
                         </li>
                         <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
                             <div className="w-1.5 h-1.5 bg-white"></div> Major Label Distribution
-                        </li>
-                        <li className="flex items-center gap-4 text-sm md:text-base font-light text-white">
-                             <div className="w-1.5 h-1.5 bg-white"></div> Full Discography Only
                         </li>
                     </ul>
                 </div>
                 <div className="bg-[#0a0a0a]/80 backdrop-blur-sm border border-white/10 p-6 md:p-10">
                     <h3 className="text-xs font-bold uppercase tracking-luxury text-gray-500 mb-6">Prohibited</h3>
                     <p className="text-sm font-light text-gray-400 leading-relaxed">
-                        Single Song Campaigns, EP Only, Catalogs &lt; 100 Songs, DistroKid/Tunecore, Independent Self-Serve.
+                        Independent Self-Serve (DistroKid/Tunecore), Unreleased Content, Fraudulent Metadata.
                     </p>
                 </div>
             </div>
