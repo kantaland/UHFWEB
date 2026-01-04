@@ -428,61 +428,6 @@ const RoiSimulator: React.FC<RoiSimulatorProps> = ({ initialStreams, songConfig,
             </div>
         </div>
 
-        {/* Intelligence Grid (AI Chat) */}
-        <div className="border-t border-white/10 bg-[#000000]">
-            <div className="px-6 py-8 md:px-12 md:py-10 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 border border-emerald-500/30 flex items-center justify-center bg-emerald-900/5">
-                        <Sparkles className="w-5 h-5 text-emerald-500" />
-                    </div>
-                    <div>
-                        <h4 className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-white leading-none">Intelligence Grid</h4>
-                        <span className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-gray-500 mt-1 block">Strategic ROI Consultant</span>
-                    </div>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-emerald-500 animate-pulse"></div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">System Online</span>
-                </div>
-            </div>
-            
-            <div className="bg-[#050505] h-[500px] flex flex-col">
-                <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 md:p-12 space-y-8 custom-scrollbar">
-                {messages.map((msg, i) => (
-                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        {msg.role === 'model' ? (
-                            <div className="max-w-[90%] md:max-w-[75%] space-y-2">
-                                 <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500 mb-1 block">Analyst</span>
-                                 <p className="text-sm md:text-lg font-light leading-relaxed text-gray-200 whitespace-pre-line">{msg.text}</p>
-                            </div>
-                        ) : (
-                            <div className="max-w-[85%] md:max-w-[60%] bg-[#111] border border-white/10 p-5 md:p-6 text-white text-sm md:text-base">{msg.text}</div>
-                        )}
-                    </div>
-                ))}
-                {isChatLoading && <div className="flex items-center gap-3 text-gray-500 text-xs font-bold uppercase tracking-widest p-6"><Loader2 className="animate-spin w-4 h-4" /> Processing Query...</div>}
-                </div>
-
-                <div className="border-t border-white/10 bg-[#080808] flex flex-col md:flex-row">
-                    <input 
-                        type="text"
-                        className="flex-1 bg-transparent px-8 py-6 text-sm md:text-lg text-white focus:outline-none placeholder-gray-600"
-                        placeholder="INITIALIZE QUERY // ASK ABOUT ROI..."
-                        value={chatInput}
-                        onChange={(e) => setChatInput(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                    />
-                    <button 
-                        onClick={handleSendMessage}
-                        disabled={isChatLoading || !chatInput.trim()}
-                        className="bg-white text-black hover:bg-emerald-500 hover:text-white px-10 py-6 font-bold uppercase tracking-[0.25em] text-xs transition-all disabled:opacity-50"
-                    >
-                        Execute
-                    </button>
-                </div>
-            </div>
-        </div>
-
     </div>
   );
 };
