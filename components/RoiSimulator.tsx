@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SongConfiguration } from '../types';
-import { AlertCircle, Check, DollarSign, PieChart, TrendingUp, Layers, RefreshCw, FileText, Activity, Lock, BarChart3, Sparkles, Send, Loader2 } from './Icons';
-import { GoogleGenAI } from "@google/genai";
+import { AlertCircle, Check, PieChart, TrendingUp, Layers, RefreshCw, FileText, Activity, BarChart3 } from './Icons';
 
 interface RoiSimulatorProps {
   initialStreams: number;
@@ -16,14 +15,6 @@ const RoiSimulator: React.FC<RoiSimulatorProps> = ({ initialStreams, songConfig,
   const [publishingSplit, setPublishingSplit] = useState(0); // Label Publishing share %
   const [timeHorizon, setTimeHorizon] = useState<1 | 3 | 5>(1);
   const [catalogSize, setCatalogSize] = useState(100);
-
-  // AI Chat State
-  const [chatInput, setChatInput] = useState('');
-  const [messages, setMessages] = useState<Array<{role: 'user' | 'model', text: string}>>([
-    { role: 'model', text: "I have analyzed your current configuration.\n\nAsk me about optimizing your deal structure, improving your ROI multiple, or potential exit scenarios." }
-  ]);
-  const [isChatLoading, setIsChatLoading] = useState(false);
-  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // Constants (Realistic Industry Averages)
   const MASTER_RPM = 3.60; 
@@ -138,68 +129,12 @@ const RoiSimulator: React.FC<RoiSimulatorProps> = ({ initialStreams, songConfig,
 
   }, [targetStreams, dealSplit, publishingSplit, timeHorizon, catalogSize]);
 
-  useEffect(() => {
-    if (chatContainerRef.current) {
-        const { scrollHeight, clientHeight } = chatContainerRef.current;
-        if (scrollHeight > clientHeight) {
-            chatContainerRef.current.scrollTo({
-                top: scrollHeight,
-                behavior: 'smooth'
-            });
-        }
-    }
-  }, [messages, isChatLoading]);
-
   // Formatters
   const fmtCurrency = (val: number) => 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
   
   const fmtCompact = (val: number) => 
     new Intl.NumberFormat('en-US', { notation: "compact", maximumFractionDigits: 1 }).format(val);
-
-  const handleSendMessage = async () => {
-    if (!chatInput.trim() || isChatLoading) return;
-    
-    const userMsg = chatInput;
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setChatInput('');
-    setIsChatLoading(true);
-
-    try {
-        const ai = new GoogleGenAI({ apiKey: process.env.API_KEY }); 
-        
-        const context = `
-            CONTEXT DATA (Live Financial Simulation):
-            - Annual Target Velocity: ${fmtCompact(targetStreams)} streams/year
-            - Projection Horizon: ${timeHorizon} Year(s)
-            - Catalog Density: ${catalogSize} Songs
-            - Deal Structure: ${dealSplit}% Label (Master) / ${publishingSplit}% Label (Publishing)
-            - Protocol Investment (Cost): ${fmtCurrency(metrics.marketingCost)}
-            - Total Gross Revenue Generated: ${fmtCurrency(metrics.grossRevenue)}
-            - Label Net Profit: ${fmtCurrency(metrics.labelShare)}
-            - Label ROI Multiple: ${metrics.roiMultiple.toFixed(2)}x
-            - Projected Monthly Net Cashflow: ${fmtCurrency(metrics.monthlyLabelShare)}
-            - Exit Valuation (based on 10x multiple): ${fmtCurrency(metrics.annualNetEarnings * 10)}
-            
-            ROLE: You are an elite, high-level financial consultant for a major music label executive. 
-            TONE: Professional, concise, sharp, institutional. Use formatting like bullet points or bold text for key figures.
-            OBJECTIVE: Help maximize ROI and plan exit strategies.
-        `;
-
-        const response = await ai.models.generateContent({
-            model: 'gemini-3-flash-preview',
-            contents: `System Context: ${context}\n\nUser Question: ${userMsg}`,
-        });
-        
-        const text = response.text;
-        setMessages(prev => [...prev, { role: 'model', text: text || "Analysis complete." }]);
-    } catch (e) {
-        console.error(e);
-        setMessages(prev => [...prev, { role: 'model', text: "Connection to Intelligence Grid interrupted. Please verify system access or try again." }]);
-    } finally {
-        setIsChatLoading(false);
-    }
-  };
 
   return (
     <div className="w-full bg-[#0a0a0a] border border-white/10 p-0 md:p-1 overflow-hidden">
@@ -427,62 +362,6 @@ const RoiSimulator: React.FC<RoiSimulatorProps> = ({ initialStreams, songConfig,
                 </div>
             </div>
         </div>
-
-        {/* Intelligence Grid (AI Chat) */}
-        <div className="border-t border-white/10 bg-[#000000]">
-            <div className="px-6 py-8 md:px-12 md:py-10 border-b border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 border border-emerald-500/30 flex items-center justify-center bg-emerald-900/5">
-                        <Sparkles className="w-5 h-5 text-emerald-500" />
-                    </div>
-                    <div>
-                        <h4 className="text-sm md:text-base font-bold uppercase tracking-[0.2em] text-white leading-none">Intelligence Grid</h4>
-                        <span className="text-[10px] md:text-xs font-medium uppercase tracking-widest text-gray-500 mt-1 block">Strategic ROI Consultant</span>
-                    </div>
-                </div>
-                <div className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 bg-emerald-500 animate-pulse"></div>
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500">System Online</span>
-                </div>
-            </div>
-            
-            <div className="bg-[#050505] h-[500px] flex flex-col">
-                <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-6 md:p-12 space-y-8 custom-scrollbar">
-                {messages.map((msg, i) => (
-                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                        {msg.role === 'model' ? (
-                            <div className="max-w-[90%] md:max-w-[75%] space-y-2">
-                                 <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-500 mb-1 block">Analyst</span>
-                                 <p className="text-sm md:text-lg font-light leading-relaxed text-gray-200 whitespace-pre-line">{msg.text}</p>
-                            </div>
-                        ) : (
-                            <div className="max-w-[85%] md:max-w-[60%] bg-[#111] border border-white/10 p-5 md:p-6 text-white text-sm md:text-base">{msg.text}</div>
-                        )}
-                    </div>
-                ))}
-                {isChatLoading && <div className="flex items-center gap-3 text-gray-500 text-xs font-bold uppercase tracking-widest p-6"><Loader2 className="animate-spin w-4 h-4" /> Processing Query...</div>}
-                </div>
-
-                <div className="border-t border-white/10 bg-[#080808] flex flex-col md:flex-row">
-                    <input 
-                        type="text"
-                        className="flex-1 bg-transparent px-8 py-6 text-sm md:text-lg text-white focus:outline-none placeholder-gray-600"
-                        placeholder="INITIALIZE QUERY // ASK ABOUT ROI..."
-                        value={chatInput}
-                        onChange={(e) => setChatInput(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                    />
-                    <button 
-                        onClick={handleSendMessage}
-                        disabled={isChatLoading || !chatInput.trim()}
-                        className="bg-white text-black hover:bg-emerald-500 hover:text-white px-10 py-6 font-bold uppercase tracking-[0.25em] text-xs transition-all disabled:opacity-50"
-                    >
-                        Execute
-                    </button>
-                </div>
-            </div>
-        </div>
-
     </div>
   );
 };
