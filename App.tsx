@@ -156,6 +156,10 @@ function App() {
   ];
 
   const handleSelectTier = (id: string) => {
+    if (id === 'pack-nano') {
+      window.open('https://www.paypal.com/ncp/payment/NQ5M7SZF7DZSN', '_blank');
+      return;
+    }
     const tier = tiers.find(t => t.id === id);
     if (tier) setSelectedTier(tier);
   };
