@@ -160,6 +160,10 @@ function App() {
       window.open('https://www.paypal.com/ncp/payment/NQ5M7SZF7DZSN', '_blank');
       return;
     }
+    if (id === 'pack-micro') {
+      window.open('https://www.paypal.com/ncp/payment/FCTWVBQCVEAHJ', '_blank');
+      return;
+    }
     const tier = tiers.find(t => t.id === id);
     if (tier) setSelectedTier(tier);
   };
