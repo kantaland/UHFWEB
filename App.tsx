@@ -272,6 +272,56 @@ function App() {
                     <h2 className="text-3xl md:text-4xl font-light uppercase tracking-widest text-white">Select Protocol</h2>
                 </div>
             </div>
+
+            <div className="mb-16 bg-[#0a0a0a] border border-white/10 p-8 md:p-12 relative overflow-hidden group">
+              <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500/50"></div>
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-8 h-8 border border-emerald-500/30 flex items-center justify-center bg-emerald-900/5">
+                    <span className="text-emerald-500 text-xs font-bold">$</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-light uppercase tracking-widest text-white">Financing Options via RTHM Fund</h3>
+                </div>
+                
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                  <div className="lg:col-span-8 space-y-6">
+                    <p className="text-gray-400 text-sm md:text-base font-light leading-relaxed">
+                      For qualifying rights holders, a portion of UHF services may be financed using existing catalog royalties through RTHM Fund.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <p className="text-xs font-bold uppercase tracking-luxury text-gray-500">Under this framework:</p>
+                      <ul className="space-y-3">
+                        <li className="flex items-start gap-4 text-sm text-gray-300 font-light leading-relaxed">
+                          <div className="w-1.5 h-px bg-white/30 mt-2.5"></div>
+                          <span>UHF provides accelerator and marketing services directly to you.</span>
+                        </li>
+                        <li className="flex items-start gap-4 text-sm text-gray-300 font-light leading-relaxed">
+                          <div className="w-1.5 h-px bg-white/30 mt-2.5"></div>
+                          <span>If you choose, UHF can introduce you to RTHM Fund to explore royalty‑backed financing.</span>
+                        </li>
+                        <li className="flex items-start gap-4 text-sm text-gray-300 font-light leading-relaxed">
+                          <div className="w-1.5 h-px bg-white/30 mt-2.5"></div>
+                          <span>RTHM Fund independently evaluates and underwrites catalogs and may, at its sole discretion, allocate a portion of funding directly to UHF as payment for services.</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="lg:col-span-4 space-y-6 pt-6 lg:pt-0 lg:border-l lg:border-white/10 lg:pl-12">
+                    <p className="text-[10px] uppercase tracking-widest leading-relaxed text-gray-500">
+                      UHF does not provide investment advice, make credit decisions, or guarantee approval, terms, or availability of financing. All financing transactions are separately underwritten and funded by RTHM Fund.
+                    </p>
+                    <div className="pt-6 border-t border-white/5">
+                      <p className="text-[10px] font-bold uppercase tracking-luxury text-emerald-500/80">
+                        Note: Financing availability depends on your catalog’s royalty profile and RTHM Fund’s underwriting criteria.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10">
               {tiers.map((tier) => (
                 <PricingCard key={tier.id} tier={tier} onSelect={handleSelectTier} />
