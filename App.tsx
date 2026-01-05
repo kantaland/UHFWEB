@@ -82,39 +82,22 @@ function App() {
       ]
     },
     {
-      id: 'pack-lite',
-      name: 'Lite Protocol',
-      subtitle: 'Strategic stream dominance.',
-      capacity: 10000,
-      capacityLabel: 'Streams',
-      price: 300,
-      accentColor: 'fuchsia',
+      id: 'pack-pilot',
+      name: 'Label & Rights Holder Pilot',
+      subtitle: 'Closed 60–90 Day Catalog Pilot',
+      capacity: 15000,
+      capacityLabel: 'Streams/Pilot',
+      price: 15000,
+      accentColor: 'cyan',
       isLocked: false,
-      recommended: false,
+      recommended: true,
       features: [
-        '100,000 Streams Allocation',
-        'Catalog Dominance',
-        'Priority Processing',
-        'Non-Recurring',
-        'Strategic Alignment'
-      ]
-    },
-    {
-      id: 'pack-entry',
-      name: 'Entry Protocol',
-      subtitle: 'System compatibility verification.',
-      capacity: 1000000,
-      capacityLabel: 'Streams',
-      price: 3000,
-      accentColor: 'lime',
-      isLocked: false,
-      recommended: false,
-      features: [
-        '1 Million Streams Allocation',
-        'Performance Validation',
-        'Backend Compatibility',
-        'Non-Recurring',
-        'Prerequisite for Core'
+        '60–90 day closed engagement focused on a curated segment (100–300 tracks)',
+        'Full catalog audit: performance segmentation, territory analysis',
+        'Hands‑on acceleration: strategy, campaigns, and optimization cycles',
+        'Before/after reporting on streams and daily floor stability',
+        '15,000 USD pilot fee is 100% credited toward first 12‑month agreement',
+        'Optional royalty‑backed financing for qualified catalogs via RTHM Fund'
       ]
     },
     {
@@ -162,10 +145,6 @@ function App() {
     }
     if (id === 'pack-micro') {
       window.open('https://www.paypal.com/ncp/payment/FCTWVBQCVEAHJ', '_blank');
-      return;
-    }
-    if (id === 'pack-lite') {
-      window.open('https://www.paypal.com/ncp/payment/UBRPHCBAW788C', '_blank');
       return;
     }
     const tier = tiers.find(t => t.id === id);
