@@ -46,24 +46,6 @@ function App() {
 
   const tiers: PricingTier[] = [
     {
-      id: 'pack-nano',
-      name: 'Nano Protocol',
-      subtitle: 'Entry-level stream acceleration.',
-      capacity: 10000,
-      capacityLabel: 'Streams',
-      price: 30,
-      accentColor: 'lime',
-      isLocked: false,
-      recommended: false,
-      features: [
-        '10,000 Streams Allocation',
-        'Performance Validation',
-        'Backend Compatibility',
-        'Non-Recurring',
-        'System Access'
-      ]
-    },
-    {
       id: 'pack-micro',
       name: 'Micro Protocol',
       subtitle: 'Focused catalog momentum.',
@@ -100,6 +82,24 @@ function App() {
       ]
     },
     {
+      id: 'pack-entry',
+      name: 'Entry Protocol',
+      subtitle: 'System compatibility verification.',
+      capacity: 1000000,
+      capacityLabel: 'Streams',
+      price: 3000,
+      accentColor: 'lime',
+      isLocked: false,
+      recommended: false,
+      features: [
+        '1 Million Streams Allocation',
+        'Performance Validation',
+        'Backend Compatibility',
+        'Non-Recurring',
+        'Prerequisite for Core'
+      ]
+    },
+    {
       id: 'pack-pilot',
       name: 'Label & Rights Holder Pilot',
       subtitle: 'Closed 60–90 Day Catalog Pilot',
@@ -116,24 +116,6 @@ function App() {
         'Before/after reporting on streams, long‑tail activity, and floor stability',
         '100% credited toward first 12‑month agreement if you continue',
         'Optional royalty‑backed financing via RTHM Fund (Independent approval required)'
-      ]
-    },
-    {
-      id: 'pack-entry',
-      name: 'Entry Protocol',
-      subtitle: 'System compatibility verification.',
-      capacity: 1000000,
-      capacityLabel: 'Streams',
-      price: 3000,
-      accentColor: 'lime',
-      isLocked: false,
-      recommended: false,
-      features: [
-        '1 Million Streams Allocation',
-        'Performance Validation',
-        'Backend Compatibility',
-        'Non-Recurring',
-        'Prerequisite for Core'
       ]
     },
     {
