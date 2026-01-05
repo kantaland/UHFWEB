@@ -100,6 +100,25 @@ function App() {
       ]
     },
     {
+      id: 'pack-pilot',
+      name: 'Label & Rights Holder Pilot',
+      subtitle: 'Closed 60–90 Day Catalog Pilot',
+      capacity: 300,
+      capacityLabel: 'Tracks (Segment)',
+      price: 15000,
+      accentColor: 'lime',
+      isLocked: false,
+      recommended: false,
+      features: [
+        '60–90 day closed engagement focused on a curated segment (100–300 tracks)',
+        'Full catalog audit: performance segmentation, territory analysis, distribution',
+        'Hands‑on acceleration: strategy, campaigns, and optimization cycles',
+        'Before/after reporting on streams, long‑tail activity, and floor stability',
+        '100% credited toward first 12‑month agreement if you continue',
+        'Optional royalty‑backed financing via RTHM Fund (Independent approval required)'
+      ]
+    },
+    {
       id: 'pack-entry',
       name: 'Entry Protocol',
       subtitle: 'System compatibility verification.',
