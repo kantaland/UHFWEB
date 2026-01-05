@@ -169,6 +169,10 @@ function App() {
       window.open('https://www.paypal.com/ncp/payment/UBRPHCBAW788C', '_blank');
       return;
     }
+    if (id === 'pack-pilot') {
+      window.location.href = 'mailto:aoi@urbanhippyfantasy.com?subject=Pilot Protocol Application';
+      return;
+    }
     const tier = tiers.find(t => t.id === id);
     if (tier) setSelectedTier(tier);
   };

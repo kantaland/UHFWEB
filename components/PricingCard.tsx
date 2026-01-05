@@ -79,7 +79,7 @@ const PricingCard: React.FC<PricingCardProps> = ({ tier, onSelect }) => {
                 group-hover:border-white/40
             `}
         >
-            <span>{tier.id === 'pack-entry' ? 'Initiate Protocol' : 'Select Configuration'}</span>
+            <span>{tier.id === 'pack-pilot' ? 'Apply for Protocol' : tier.id === 'pack-entry' ? 'Initiate Protocol' : 'Select Configuration'}</span>
             <ChevronRight className="w-4 h-4" />
         </button>
       </div>
