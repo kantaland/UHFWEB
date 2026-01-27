@@ -108,34 +108,6 @@ function App() {
           "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
         }
       ]
-    },
-    {
-      "category": "Twitch Live Protocol",
-      "plans": [
-        {
-          "id": "twitch-30day",
-          "name": "Urban Boost — Twitch Stream Protocol (30-Day)",
-          "features": "1,000 Live Viewers",
-          "price": 1600.00,
-          "status": "active",
-          "restrictions": "30-Day Automated Bot Connection"
-        }
-      ]
-    },
-    {
-      "category": "TikTok Organic Protocol",
-      "plans": [
-        {
-          "id": "tiktok-organic",
-          "name": "Urban Boost — TikTok Creator Protocol (Organic)",
-          "features": "Organic Growth Protocol",
-          "quality": "Super High (20+ Videos)",
-          "quantity_locked": 10000,
-          "price": 199.00,
-          "status": "active",
-          "restrictions": "Profile must be public, no refunds if private"
-        }
-      ]
     }
   ];
 
@@ -195,24 +167,6 @@ function App() {
         'Optional royalty‑backed financing via RTHM Fund (Independent approval required)'
       ]
     },
-    {
-      id: 'pack-scale',
-      name: 'Global Scale',
-      subtitle: 'Priority release dominance.',
-      capacity: 120000000,
-      capacityLabel: 'Streams / Yr',
-      price: 318000,
-      accentColor: 'fuchsia',
-      isLocked: false,
-      recommended: false,
-      features: [
-        '120 Million Streams Total',
-        '$53,000 Deposit (2 Mo)',
-        'Catalog Dominance',
-        'Algorithmic Leverage',
-        'Strategic Alignment'
-      ]
-    },
   ];
 
   const handleSelectTier = (id: string) => {
@@ -234,6 +188,16 @@ function App() {
     }
     const tier = tiers.find(t => t.id === id);
     if (tier) setSelectedTier(tier);
+  };
+
+  const handleProtocolClick = (plan: any) => {
+    if (plan.id.startsWith('ig-')) {
+      window.open('https://www.paypal.com/ncp/payment/YMB2BHTJ8VC8U', '_blank');
+    } else if (plan.id.startsWith('yt-')) {
+      window.open('https://www.paypal.com/ncp/payment/F82SGD34AK4AU', '_blank');
+    } else {
+      window.location.href = `mailto:aoi@urbanhippyfantasy.com?subject=${plan.name} Inquiry`;
+    }
   };
 
   return (
@@ -396,10 +360,7 @@ function App() {
                     <div 
                       key={plan.id}
                       className="relative group p-6 sm:p-10 lg:p-12 transition-all duration-500 cursor-pointer border-b border-r border-white/5 bg-[#0a0a0a] hover:bg-[#111] flex flex-col justify-between"
-                      onClick={() => {
-                        // Handle protocol selection or redirect to email
-                        window.location.href = `mailto:aoi@urbanhippyfantasy.com?subject=${plan.name} Inquiry`;
-                      }}
+                      onClick={() => handleProtocolClick(plan)}
                     >
                       <div className="absolute top-0 left-0 w-full h-[1px] bg-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       <div>
