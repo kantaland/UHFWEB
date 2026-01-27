@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PricingTier, SongConfiguration } from './types';
+import { PricingTier, SongConfiguration, ProtocolCategory } from './types';
 import PricingCard from './components/PricingCard';
 import RoiSimulator from './components/RoiSimulator';
 import CheckoutModal from './components/CheckoutModal';
@@ -43,6 +43,94 @@ function App() {
   const [showCaseStudies, setShowCaseStudies] = useState(false);
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showFaq, setShowFaq] = useState(false);
+
+  const protocols: ProtocolCategory[] = [
+    {
+      "category": "YouTube Growth Packages",
+      "plans": [
+        {
+          "id": "yt-max",
+          "tier": "Tier 3 (Max)",
+          "name": "Urban Boost — YouTube Creator Protocol (Max)",
+          "features": "10,000 Views + 2,000 Likes + 2,000 Subs",
+          "price": 300.00,
+          "status": "active"
+        },
+        {
+          "id": "yt-pro",
+          "tier": "Tier 2 (Pro)",
+          "name": "Urban Boost — YouTube Creator Protocol (Pro)",
+          "features": "5,000 Views + 1,000 Likes + 1,000 Subs",
+          "price": 180.00,
+          "status": "active"
+        },
+        {
+          "id": "yt-starter",
+          "tier": "Tier 1 (Starter)",
+          "name": "Urban Boost — YouTube Creator Protocol (Starter)",
+          "features": "2,500 Views + 500 Likes + 500 Subs",
+          "price": 120.00,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "category": "Instagram Growth Packages",
+      "plans": [
+        {
+          "id": "ig-growth",
+          "tier": "Growth (5K)",
+          "name": "Urban Boost — Instagram Creator Protocol (Pro)",
+          "features": "5,000 Followers + 1,000 Likes + 1,000 Shares",
+          "price": 200.00,
+          "status": "active"
+        },
+        {
+          "id": "ig-scale",
+          "tier": "Scale (10K)",
+          "name": "Urban Boost — Instagram Creator Protocol (Elite)",
+          "features": "10,000 Followers + 2,000 Likes + 2,000 Shares",
+          "price": 369.00,
+          "status": "active"
+        },
+        {
+          "id": "ig-dominance",
+          "tier": "Dominance (50K)",
+          "name": "Urban Boost — Instagram Creator Protocol (Ultra)",
+          "features": "50,000 Followers + 10,000 Likes + 10,000 Shares",
+          "price": 1550.00,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "category": "Twitch Live Protocol",
+      "plans": [
+        {
+          "id": "twitch-30day",
+          "name": "Urban Boost — Twitch Stream Protocol (30-Day)",
+          "features": "1,000 Live Viewers + 4,000 Followers + 30 Days Auto-Connect",
+          "price": 1600.00,
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "category": "TikTok Organic Protocol",
+      "plans": [
+        {
+          "id": "tiktok-organic",
+          "name": "Urban Boost — TikTok Creator Protocol (Organic)",
+          "features": "Organic Growth Protocol",
+          "quality": "Super High (20+ Videos)",
+          "quantity_locked": 10000,
+          "price": 199.00,
+          "status": "active",
+          "restrictions": "Profile must be public, no refunds if private"
+        }
+      ]
+    }
+  ];
 
   const tiers: PricingTier[] = [
     {
@@ -287,6 +375,67 @@ function App() {
                 <PricingCard key={tier.id} tier={tier} onSelect={handleSelectTier} />
               ))}
             </div>
+
+            {protocols.map((category, catIdx) => (
+              <div key={catIdx} className="mt-20">
+                <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-8">
+                  <div>
+                    <span className="block text-xs font-bold uppercase tracking-luxury text-gray-500 mb-3">0{catIdx + 3} — {category.category}</span>
+                    <h2 className="text-2xl md:text-3xl font-light uppercase tracking-widest text-white">{category.category}</h2>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border border-white/10">
+                  {category.plans.map((plan) => (
+                    <div 
+                      key={plan.id}
+                      className="relative group p-6 sm:p-10 lg:p-12 transition-all duration-500 cursor-pointer border-b border-r border-white/5 bg-[#0a0a0a] hover:bg-[#111] flex flex-col justify-between"
+                      onClick={() => {
+                        // Handle protocol selection or redirect to email
+                        window.location.href = `mailto:aoi@urbanhippyfantasy.com?subject=${plan.name} Inquiry`;
+                      }}
+                    >
+                      <div className="absolute top-0 left-0 w-full h-[1px] bg-fuchsia-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div>
+                        <div className="flex justify-between items-start mb-6 md:mb-8">
+                          <span className="text-xs font-bold uppercase tracking-luxury text-gray-500">{plan.tier || 'Protocol'}</span>
+                        </div>
+                        <h3 className="text-xl md:text-2xl font-light uppercase tracking-widest text-white mb-3 leading-tight">{plan.name}</h3>
+                        <div className="mb-10 md:mb-12">
+                          <div className="flex items-start gap-1">
+                            <span className="text-sm text-gray-500 mt-2">$</span>
+                            <span className="font-light text-white tracking-tight text-4xl md:text-5xl">
+                              {plan.price.toLocaleString()}
+                            </span>
+                          </div>
+                          <div className="h-px w-full bg-white/10 mt-8 mb-8"></div>
+                          <div className="space-y-4">
+                            <p className="text-sm text-gray-300 font-light leading-relaxed">
+                              {plan.features}
+                            </p>
+                            {plan.quality && (
+                              <p className="text-xs text-fuchsia-400 uppercase tracking-widest">
+                                Quality: {plan.quality}
+                              </p>
+                            )}
+                            {plan.restrictions && (
+                              <p className="text-[10px] text-gray-500 uppercase tracking-widest leading-tight">
+                                Note: {plan.restrictions}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-8 pt-8 border-t border-white/5">
+                        <button className="w-full py-5 border border-white/20 text-white text-xs font-bold uppercase tracking-luxury hover:bg-white hover:text-black hover:border-white transition-all duration-300 flex items-center justify-between px-6 group-hover:border-white/40">
+                          <span>Initiate Protocol</span>
+                          <ChevronRight className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
         </div>
       </section>
 

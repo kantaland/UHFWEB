@@ -1,4 +1,21 @@
 
+export interface ProtocolPlan {
+  id: string;
+  name: string;
+  tier?: string;
+  features: string;
+  price: number;
+  status: string;
+  quality?: string;
+  quantity_locked?: number;
+  restrictions?: string;
+}
+
+export interface ProtocolCategory {
+  category: string;
+  plans: ProtocolPlan[];
+}
+
 export interface PricingTier {
   id: string;
   name: string;
