@@ -46,24 +46,6 @@ function App() {
 
   const tiers: PricingTier[] = [
     {
-      id: 'pack-micro',
-      name: 'Micro Protocol',
-      subtitle: 'Focused catalog momentum.',
-      capacity: 50000,
-      capacityLabel: 'Streams',
-      price: 150,
-      accentColor: 'cyan',
-      isLocked: false,
-      recommended: false,
-      features: [
-        '50,000 Streams Allocation',
-        'Enhanced Velocity',
-        'Algorithmic Warmup',
-        'Non-Recurring',
-        'Performance Support'
-      ]
-    },
-    {
       id: 'pack-lite',
       name: 'Lite Protocol',
       subtitle: 'Strategic stream dominance.',
@@ -116,24 +98,6 @@ function App() {
         'Before/after reporting on streams, long‑tail activity, and floor stability',
         '100% credited toward first 12‑month agreement if you continue',
         'Optional royalty‑backed financing via RTHM Fund (Independent approval required)'
-      ]
-    },
-    {
-      id: 'pack-annual',
-      name: 'Annual Core',
-      subtitle: 'Consistent monthly asset growth.',
-      capacity: 12000000,
-      capacityLabel: 'Streams / Yr',
-      price: 32400,
-      accentColor: 'cyan',
-      isLocked: false,
-      recommended: true,
-      features: [
-        '1M Streams Per Month',
-        '$5,400 Deposit (2 Mo)',
-        'Monthly Billing',
-        'Royalty Optimization',
-        '12 Month Term'
       ]
     },
     {
