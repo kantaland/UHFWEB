@@ -49,7 +49,7 @@ function App() {
       "category": "YouTube Growth Packages",
       "plans": [
         {
-          "id": "yt-max",
+          "id": "yt-max-1",
           "tier": "Tier 3 (Max)",
           "name": "Urban Boost — YouTube Creator Protocol (Max)",
           "features": "10,000 Views + 2,000 Likes + 2,000 Subs",
@@ -58,7 +58,25 @@ function App() {
           "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
         },
         {
-          "id": "yt-pro",
+          "id": "yt-max-2",
+          "tier": "Tier 3 (Max)",
+          "name": "YouTube Creator Protocol — MAX Growth Pack",
+          "features": "10,000 Views + 2,000 Likes + 2,000 Subs",
+          "price": 300.00,
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "yt-max-3",
+          "tier": "Tier 3 (Max)",
+          "name": "Urban Signal YT — Full Momentum Plan",
+          "features": "10,000 Views + 2,000 Likes + 2,000 Subs",
+          "price": 300.00,
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "yt-pro-1",
           "tier": "Tier 2 (Pro)",
           "name": "Urban Boost — YouTube Creator Protocol (Pro)",
           "features": "5,000 Views + 1,000 Likes + 1,000 Subs",
@@ -67,9 +85,45 @@ function App() {
           "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
         },
         {
-          "id": "yt-starter",
+          "id": "yt-pro-2",
+          "tier": "Tier 2 (Pro)",
+          "name": "YouTube Creator Protocol — Pro Growth Pack",
+          "features": "5,000 Views + 1,000 Likes + 1,000 Subs",
+          "price": 180.00,
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "yt-pro-3",
+          "tier": "Tier 2 (Pro)",
+          "name": "Urban Signal YT — Momentum Plan",
+          "features": "5,000 Views + 1,000 Likes + 1,000 Subs",
+          "price": 180.00,
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "yt-starter-1",
           "tier": "Tier 1 (Starter)",
           "name": "Urban Boost — YouTube Creator Protocol (Starter)",
+          "features": "2,500 Views + 500 Likes + 500 Subs",
+          "price": 120.00,
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "yt-starter-2",
+          "tier": "Tier 1 (Starter)",
+          "name": "YouTube Creator Protocol — Starter Pack",
+          "features": "2,500 Views + 500 Likes + 500 Subs",
+          "price": 120.00,
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "yt-starter-3",
+          "tier": "Tier 1 (Starter)",
+          "name": "Urban Signal YT — Launch Plan",
           "features": "2,500 Views + 500 Likes + 500 Subs",
           "price": 120.00,
           "status": "active",
@@ -81,7 +135,7 @@ function App() {
       "category": "Instagram Growth Packages",
       "plans": [
         {
-          "id": "ig-growth",
+          "id": "ig-growth-1",
           "tier": "Growth (5K)",
           "name": "Urban Boost — Instagram Creator Protocol (Pro)",
           "features": "5,000 Followers + 1,000 Likes + 1,000 Shares",
@@ -90,7 +144,25 @@ function App() {
           "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
         },
         {
-          "id": "ig-scale",
+          "id": "ig-growth-2",
+          "tier": "Growth (5K)",
+          "name": "Instagram Creator Protocol — Growth Pack",
+          "features": "5,000 Followers + 1,000 Likes + 1,000 Shares",
+          "price": 200.00,
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "ig-growth-3",
+          "tier": "Growth (5K)",
+          "name": "Urban Signal IG — Momentum Plan",
+          "features": "5,000 Followers + 1,000 Likes + 1,000 Shares",
+          "price": 200.00,
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "ig-scale-1",
           "tier": "Scale (10K)",
           "name": "Urban Boost — Instagram Creator Protocol (Elite)",
           "features": "10,000 Followers + 2,000 Likes + 2,000 Shares",
@@ -99,9 +171,45 @@ function App() {
           "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
         },
         {
-          "id": "ig-dominance",
+          "id": "ig-scale-2",
+          "tier": "Scale (10K)",
+          "name": "Instagram Creator Protocol — Expansion Pack",
+          "features": "10,000 Followers + 2,000 Likes + 2,000 Shares",
+          "price": 369.00,
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "ig-scale-3",
+          "tier": "Scale (10K)",
+          "name": "Urban Signal IG — Acceleration Plan",
+          "features": "10,000 Followers + 2,000 Likes + 2,000 Shares",
+          "price": 369.00,
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "ig-dominance-1",
           "tier": "Dominance (50K)",
           "name": "Urban Boost — Instagram Creator Protocol (Ultra)",
+          "features": "50,000 Followers + 10,000 Likes + 10,000 Shares",
+          "price": 1550.00,
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "ig-dominance-2",
+          "tier": "Dominance (50K)",
+          "name": "Instagram Creator Protocol — Authority Pack",
+          "features": "50,000 Followers + 10,000 Likes + 10,000 Shares",
+          "price": 1550.00,
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
+        },
+        {
+          "id": "ig-dominance-3",
+          "tier": "Dominance (50K)",
+          "name": "Urban Signal IG — Empire Plan",
           "features": "50,000 Followers + 10,000 Likes + 10,000 Shares",
           "price": 1550.00,
           "status": "active",
