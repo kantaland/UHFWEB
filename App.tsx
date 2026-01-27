@@ -300,10 +300,6 @@ function App() {
                           <div className="w-1.5 h-px bg-white/30 mt-2.5"></div>
                           <span>If you choose, UHF can introduce you to RTHM Fund to explore royalty‑backed financing.</span>
                         </li>
-                        <li className="flex items-start gap-4 text-sm text-gray-300 font-light leading-relaxed">
-                          <div className="w-1.5 h-px bg-white/30 mt-2.5"></div>
-                          <span>RTHM Fund independently evaluates and underwrites catalogs and may, at its sole discretion, allocate a portion of funding directly to UHF as payment for services.</span>
-                        </li>
                       </ul>
                     </div>
                   </div>
