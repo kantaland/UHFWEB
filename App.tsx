@@ -54,7 +54,8 @@ function App() {
           "name": "Urban Boost — YouTube Creator Protocol (Max)",
           "features": "10,000 Views + 2,000 Likes + 2,000 Subs",
           "price": 300.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
         },
         {
           "id": "yt-pro",
@@ -62,7 +63,8 @@ function App() {
           "name": "Urban Boost — YouTube Creator Protocol (Pro)",
           "features": "5,000 Views + 1,000 Likes + 1,000 Subs",
           "price": 180.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
         },
         {
           "id": "yt-starter",
@@ -70,7 +72,8 @@ function App() {
           "name": "Urban Boost — YouTube Creator Protocol (Starter)",
           "features": "2,500 Views + 500 Likes + 500 Subs",
           "price": 120.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
         }
       ]
     },
@@ -83,7 +86,8 @@ function App() {
           "name": "Urban Boost — Instagram Creator Protocol (Pro)",
           "features": "5,000 Followers + 1,000 Likes + 1,000 Shares",
           "price": 200.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
         },
         {
           "id": "ig-scale",
@@ -91,7 +95,8 @@ function App() {
           "name": "Urban Boost — Instagram Creator Protocol (Elite)",
           "features": "10,000 Followers + 2,000 Likes + 2,000 Shares",
           "price": 369.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
         },
         {
           "id": "ig-dominance",
@@ -99,7 +104,8 @@ function App() {
           "name": "Urban Boost — Instagram Creator Protocol (Ultra)",
           "features": "50,000 Followers + 10,000 Likes + 10,000 Shares",
           "price": 1550.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
         }
       ]
     },
@@ -109,9 +115,10 @@ function App() {
         {
           "id": "twitch-30day",
           "name": "Urban Boost — Twitch Stream Protocol (30-Day)",
-          "features": "1,000 Live Viewers + 4,000 Followers + 30 Days Auto-Connect",
+          "features": "1,000 Live Viewers",
           "price": 1600.00,
-          "status": "active"
+          "status": "active",
+          "restrictions": "30-Day Automated Bot Connection"
         }
       ]
     },
