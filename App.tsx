@@ -44,72 +44,7 @@ function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showFaq, setShowFaq] = useState(false);
 
-  const protocols: ProtocolCategory[] = [
-    {
-      "category": "YouTube Growth Packages",
-      "plans": [
-        {
-          "id": "yt-max-1",
-          "tier": "Tier 3 (Max)",
-          "name": "Urban Boost — YouTube Creator Protocol (Max)",
-          "features": "10,000 Views + 2,000 Likes + 2,000 Subs",
-          "price": 300.00,
-          "status": "active",
-          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
-        },
-        {
-          "id": "yt-pro-1",
-          "tier": "Tier 2 (Pro)",
-          "name": "Urban Boost — YouTube Creator Protocol (Pro)",
-          "features": "5,000 Views + 1,000 Likes + 1,000 Subs",
-          "price": 180.00,
-          "status": "active",
-          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
-        },
-        {
-          "id": "yt-starter-1",
-          "tier": "Tier 1 (Starter)",
-          "name": "Urban Boost — YouTube Creator Protocol (Starter)",
-          "features": "2,500 Views + 500 Likes + 500 Subs",
-          "price": 120.00,
-          "status": "active",
-          "restrictions": "Public Link | 0-24h Start | Global Geo | Lifetime Refill"
-        }
-      ]
-    },
-    {
-      "category": "Instagram Growth Packages",
-      "plans": [
-        {
-          "id": "ig-growth-1",
-          "tier": "Growth (5K)",
-          "name": "Urban Boost — Instagram Creator Protocol (Pro)",
-          "features": "5,000 Followers + 1,000 Likes + 1,000 Shares",
-          "price": 200.00,
-          "status": "active",
-          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
-        },
-        {
-          "id": "ig-scale-1",
-          "tier": "Scale (10K)",
-          "name": "Urban Boost — Instagram Creator Protocol (Elite)",
-          "features": "10,000 Followers + 2,000 Likes + 2,000 Shares",
-          "price": 369.00,
-          "status": "active",
-          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
-        },
-        {
-          "id": "ig-dominance-1",
-          "tier": "Dominance (50K)",
-          "name": "Urban Boost — Instagram Creator Protocol (Ultra)",
-          "features": "50,000 Followers + 10,000 Likes + 10,000 Shares",
-          "price": 1550.00,
-          "status": "active",
-          "restrictions": "Post/Profile Link | Public Access | Global Geo | Lifetime Refill"
-        }
-      ]
-    }
-  ];
+  const protocols: ProtocolCategory[] = [];
 
   const tiers: PricingTier[] = [
     {
@@ -191,13 +126,7 @@ function App() {
   };
 
   const handleProtocolClick = (plan: any) => {
-    if (plan.id.startsWith('ig-')) {
-      window.open('https://www.paypal.com/ncp/payment/YMB2BHTJ8VC8U', '_blank');
-    } else if (plan.id.startsWith('yt-')) {
-      window.open('https://www.paypal.com/ncp/payment/F82SGD34AK4AU', '_blank');
-    } else {
-      window.location.href = `mailto:aoi@urbanhippyfantasy.com?subject=${plan.name} Inquiry`;
-    }
+    window.location.href = `mailto:aoi@urbanhippyfantasy.com?subject=${plan.name} Inquiry`;
   };
 
   return (
