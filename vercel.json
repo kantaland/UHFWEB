@@ -1,3 +1,5 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+  "rewrites": [
+    { "source": "/promo/:match*", "destination": "https://uhf-p-sigma.vercel.app/" }
+  ]
 }
