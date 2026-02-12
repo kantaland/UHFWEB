@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/promo/:match*", "destination": "https://uhf-p-git-main-uhfs-projects.vercel.app//:match*" }
+    { "source": "/promo/:match*", "destination": "https://uhf-p-uhfs-projects.vercel.app/:match*" }
   ]
 }
